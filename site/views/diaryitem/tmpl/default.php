@@ -18,6 +18,15 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_diary' . $
 }
 ?>
 
+<?php 
+$active = JFactory::getApplication()->getMenu()->getActive();
+if (!$active->page_heading){
+    echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
+} else {
+    echo '<h1>Diary item '.$this->item->id.'</h1>';
+}
+?>
+
 <?php
 $user = JFactory::getUser();
 $loginuser = $user->id;
@@ -40,7 +49,7 @@ if ($loginuser == $owner){
 
         <ul class="fields_list">
 
-            			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_ID'); ?>:
+            		<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_ID'); ?>:
 			<?php echo $this->item->id; ?></li>
 			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_STATE'); ?>:
 			<?php echo $this->item->state; ?></li>

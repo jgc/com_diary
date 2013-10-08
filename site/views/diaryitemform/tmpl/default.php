@@ -119,11 +119,24 @@ if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
 <?php if($allowEdit): ?>
 
 <div class="diaryitem-edit front-end-edit">
-    <?php if (!empty($this->item->id)): ?>
-        <h1>Edit Item <?php echo $this->item->id; ?></h1>
+    
+<?php 
+$active = JFactory::getApplication()->getMenu()->getActive();
+if (!$active->page_heading){
+        <?php if (!empty($this->item->id)): ?>
+        <h1>Edit diary item <?php echo $this->item->id; ?></h1>
     <?php else: ?>
-        <h1>Add a new diary entry</h1>
+        <h1>Add a new diary item</h1>
     <?php endif; ?>
+} else {
+    <?php if (!empty($this->item->id)): ?>
+        <?php echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>'; ?>
+    <?php else: ?>
+        <?php echo '<h1>'.$active->page_heading.'</h1>'; ?>
+    <?php endif; ?>
+}
+?>
+
     
     <form id="form-diaryitem" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
         <ul>

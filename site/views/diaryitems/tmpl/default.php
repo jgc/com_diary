@@ -17,10 +17,23 @@ defined('_JEXEC') or die;
     }
 </script>
 
+<?php 
+$active = JFactory::getApplication()->getMenu()->getActive();
+if (!$active->page_heading){
+    echo '<h1>'.$active->page_heading.'</h1>';
+} else {
+    echo '<h1>Diary item</h1>';
+}
+?>
+
+
+<h1><?php echo $active->page_heading . ' ' . $this->item->id; ?></h1>
+
 <div class="items">
     <ul class="items_list">
 <?php $show = false; ?>
-        <?php foreach ($this->items as $item) : ?>        
+
+<?php foreach ($this->items as $item) : ?>        
 
 <?php
 $user = JFactory::getUser();
