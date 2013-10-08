@@ -123,17 +123,17 @@ if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
 <?php 
 $active = JFactory::getApplication()->getMenu()->getActive();
 if (!$active->page_heading){
-        <?php if (!empty($this->item->id)): ?>
-        <h1>Edit diary item <?php echo $this->item->id; ?></h1>
-    <?php else: ?>
-        <h1>Add a new diary item</h1>
-    <?php endif; ?>
+        if (!empty($this->item->id)){
+	    echo '<h1>Edit diary item'.$this->item->id.'</h1>';
+        } else {
+	    echo '<h1>Edit diary item'.$this->item->id.'</h1>';
+	}
 } else {
-    <?php if (!empty($this->item->id)): ?>
-        <?php echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>'; ?>
-    <?php else: ?>
-        <?php echo '<h1>'.$active->page_heading.'</h1>'; ?>
-    <?php endif; ?>
+        if (!empty($this->item->id)){
+	    echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
+        } else {
+	    echo '<h1>'.$active->page_heading.'</h1>';
+	}
 }
 ?>
 
