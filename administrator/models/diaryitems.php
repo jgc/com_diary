@@ -26,20 +26,17 @@ class DiaryModeldiaryitems extends JModelList {
     public function __construct($config = array()) {
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
-                                'id', 'a.id',
+                'id', 'a.id',
                 'ordering', 'a.ordering',
                 'state', 'a.state',
-                'created_by', 'a.created_by',
-                'dname', 'a.dname',
-                'ditemdate', 'a.ditemdate',
-                'notes', 'a.notes',
-                'createdby', 'a.createdby',
-                'created', 'a.created',
+		'created', 'a.created',
                 'updated', 'a.updated',
-                'fileupload', 'a.fileupload',
-                'dint', 'a.dint',
-                'checkbox', 'a.checkbox',
-
+                'created_by', 'a.created_by',
+                'owner', 'a.owner',
+                'date', 'a.date',
+                'title', 'a.title',
+                'nameid', 'a.nameid',
+                'notes', 'a.notes',
             );
         }
 
@@ -64,8 +61,8 @@ class DiaryModeldiaryitems extends JModelList {
 
         
 		//Filtering ditemdate
-		$this->setState('filter.ditemdate.from', $app->getUserStateFromRequest($this->context.'.filter.ditemdate.from', 'filter_from_ditemdate', '', 'string'));
-		$this->setState('filter.ditemdate.to', $app->getUserStateFromRequest($this->context.'.filter.ditemdate.to', 'filter_to_ditemdate', '', 'string'));
+		$this->setState('filter.ditemdate.from', $app->getUserStateFromRequest($this->context.'.filter.date.from', 'filter_from_date', '', 'string'));
+		$this->setState('filter.ditemdate.to', $app->getUserStateFromRequest($this->context.'.filter.date.to', 'filter_to_date', '', 'string'));
 
 		//Filtering created
 		$this->setState('filter.created.from', $app->getUserStateFromRequest($this->context.'.filter.created.from', 'filter_from_created', '', 'string'));
@@ -126,10 +123,6 @@ class DiaryModeldiaryitems extends JModelList {
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-		// Join over the user field 'createdby'
-		$query->select('createdby.name AS createdby');
-		$query->join('LEFT', '#__users AS createdby ON createdby.id = a.createdby');
-
         
     // Filter by published state
     $published = $this->getState('filter.state');
@@ -147,20 +140,20 @@ class DiaryModeldiaryitems extends JModelList {
                 $query->where('a.id = ' . (int) substr($search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
-                $query->where('( a.dname LIKE '.$search.'  OR  a.notes LIKE '.$search.' )');
+                $query->where('( a.title LIKE '.$search.'  OR  a.notes LIKE '.$search.' )');
             }
         }
 
         
 
 		//Filtering ditemdate
-		$filter_ditemdate_from = $this->state->get("filter.ditemdate.from");
-		if ($filter_ditemdate_from) {
-			$query->where("a.ditemdate >= '".$db->escape($filter_ditemdate_from)."'");
+		$filter_date_from = $this->state->get("filter.date.from");
+		if ($filter_date_from) {
+			$query->where("a.date >= '".$db->escape($filter_date_from)."'");
 		}
-		$filter_ditemdate_to = $this->state->get("filter.ditemdate.to");
-		if ($filter_ditemdate_to) {
-			$query->where("a.ditemdate <= '".$db->escape($filter_ditemdate_to)."'");
+		$filter_date_to = $this->state->get("filter.date.to");
+		if ($filter_date_to) {
+			$query->where("a.date <= '".$db->escape($filter_date_to)."'");
 		}
 
 		//Filtering created

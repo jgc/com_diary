@@ -47,7 +47,7 @@
             cols="100"
             rows="8" /> 
 
-       <field name="dog" type="text"             
+       <field name="nameid" type="text"             
             label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
             description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
             filter="safehtml"
