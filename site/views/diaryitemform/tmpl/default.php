@@ -132,7 +132,7 @@ if ($pheading == ""){
         if (!empty($this->item->id)){
 	    echo '<h1> Edit '.$pheading.' '.$this->item->id.'</h1>';
         } else {
-	    echo '<h1> Edit'.$pheading.'</h1>';
+	    echo '<h1> Edit '.$pheading.'</h1>';
 	}
 }
 ?>
