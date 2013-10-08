@@ -19,8 +19,9 @@ defined('_JEXEC') or die;
 
 <?php 
 $active = JFactory::getApplication()->getMenu()->getActive();
-if (!$active->page_heading){
-    echo '<h1>'.$active->page_heading.'</h1>';
+$pheading = $active->page_heading;
+if ($active->page_heading != ""){
+    echo '<h1>'.$pheading.'</h1>';
 } else {
     echo '<h1>Diary item</h1>';
 }
