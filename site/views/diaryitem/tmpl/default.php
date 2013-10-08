@@ -19,11 +19,11 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_diary' . $
 ?>
 
 <?php 
-$active = JFactory::getApplication()->getMenu()->getActive();
-if (!$active->page_heading){
+$pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
+if ($pheading != ""){
     echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
 } else {
-    echo '<h1>Diary item '.$this->item->id.'</h1>';
+    echo '<h1>Diary entry '.$this->item->id.'</h1>';
 }
 ?>
 

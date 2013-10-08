@@ -18,12 +18,11 @@ defined('_JEXEC') or die;
 </script>
 
 <?php 
-$active = JFactory::getApplication()->getMenu()->getActive();
-$pheading = $active->page_heading;
-if ($active->page_heading != ""){
+$pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
+if ($pheading != ""){
     echo '<h1>'.$pheading.'</h1>';
 } else {
-    echo '<h1>Diary item</h1>';
+    echo '<h1>Diary entries</h1>';
 }
 ?>
 

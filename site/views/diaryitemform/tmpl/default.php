@@ -121,18 +121,18 @@ if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
 <div class="diaryitem-edit front-end-edit">
     
 <?php 
-$active = JFactory::getApplication()->getMenu()->getActive();
-if (!$active->page_heading){
+$pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
+if ($pheading == ""){
         if (!empty($this->item->id)){
-	    echo '<h1>Edit diary item'.$this->item->id.'</h1>';
+	    echo '<h1>Edit diary entry '.$this->item->id.'</h1>';
         } else {
-	    echo '<h1>Edit diary item'.$this->item->id.'</h1>';
+	    echo '<h1>Add diary entry</h1>';
 	}
 } else {
         if (!empty($this->item->id)){
-	    echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
+	    echo '<h1> Edit '.$pheading.' '.$this->item->id.'</h1>';
         } else {
-	    echo '<h1>'.$active->page_heading.'</h1>';
+	    echo '<h1> Edit'.$pheading.'</h1>';
 	}
 }
 ?>
