@@ -92,19 +92,19 @@ else{
                     JError::raiseError('500', JText::_('JERROR_ALERTNOAUTHOR'));
                 }
                 
-				// Check published state.
-				if ($published = $this->getState('filter.published'))
-				{
-					if ($table->state != $published) {
-						return $this->_item;
-					}
-				}
+		// Check published state.
+		if ($published = $this->getState('filter.published'))
+		{
+			if ($table->state != $published) {
+			return $this->_item;
+			}
+		}
 
-				// Convert the JTable to a clean JObject.
-				$properties = $table->getProperties(1);
-				$this->_item = JArrayHelper::toObject($properties, 'JObject');
-			} elseif ($error = $table->getError()) {
-				$this->setError($error);
+		// Convert the JTable to a clean JObject.
+		$properties = $table->getProperties(1);
+		$this->_item = JArrayHelper::toObject($properties, 'JObject');
+		} elseif ($error = $table->getError()) {
+			$this->setError($error);
 			}
 		}
 
@@ -223,10 +223,10 @@ else{
 	 * @return	mixed		The user id on success, false on failure.
 	 * @since	1.6
 	 */
-	public function save($data)
-	{
-		$id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('diaryitem.id');
-        $state = (!empty($data['state'])) ? 1 : 0;
+
+	public function save($data){
+	$id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('diaryitem.id');
+	$state = (!empty($data['state'])) ? 1 : 0;
         $user = JFactory::getUser();
 
         if($id) {
@@ -239,10 +239,10 @@ else{
             //Check the user can create new items in this section
             $authorised = $user->authorise('core.create', 'com_diary');
             if($user->authorise('core.edit.state', 'com_diary.diaryitem.'.$id) !== true && $state == 1){ //The user cannot edit the state of the item.
-                $data['state'] = 0;
+                $data['state'] = 1;
             }
         }
-
+     
         if ($authorised !== true) {
             JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
             return false;
@@ -250,7 +250,7 @@ else{
         
         $table = $this->getTable();
         if ($table->save($data) === true) {
-            return $id;
+	   	return $id;
         } else {
             return false;
         }

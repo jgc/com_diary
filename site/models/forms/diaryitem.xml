@@ -6,27 +6,33 @@
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
-       <field name="created_by" type="createdby" default="" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
-
-       <field name="dname" type="text"
+       <field name="owner" type="user"
                 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DNAME"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DNAME" 
+            label="COM_DIARY_FORM_LBL_DIARYITEM_OWNER"
+            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER" 
+                
+                
+                 /> 
+
+       <field name="date" type="calendar"
+                
+            label="COM_DIARY_FORM_LBL_DIARYITEM_DATE"
+            description="COM_DIARY_FORM_DESC_DIARYITEM_DATE" 
                 
                 
                  required="true" 
+            filter="raw" /> 
+
+       <field name="title" type="text"
+                
+            label="COM_DIARY_FORM_LBL_DIARYITEM_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYITEM_TITLE" 
+                
+                
+                
+            filter="safehtml"
             size="20"
             maxlength="25" /> 
-
-       <field name="ditemdate" type="calendar"
-                
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DITEMDATE"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DITEMDATE" 
-                
-                
-                 required="true"  /> 
 
        <field name="notes" type="textarea"
                 
@@ -38,50 +44,20 @@
             cols="100"
             rows="8" /> 
 
-       <field name="createdby" type="createdby" default="" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_CREATEDBY"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_CREATEDBY"  /> 
+       <field name="dog" type="text"
+                
+            label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
+            description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
+                
+                
+                
+            filter="safehtml"
+            size="25"
+            maxlength="255" /> 
 
-       <field name="created" type="timecreated" default="" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED"  /> 
-
-       <field name="updated" type="timeupdated" default="" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_UPDATED"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_UPDATED"  /> 
-
-       <field name="fileupload" type="file"
-                
-            label="COM_DIARY_FORM_LBL_DIARYITEM_FILEUPLOAD"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_FILEUPLOAD" 
-                
-                
-                
-            upload_directory="dfiles"
-            accept=".jpeg,.jpg,.png,.gif"
-            max_size="500" /> 
-
-       <field name="dint" type="integer"
-                
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DINT"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DINT" 
-                
-                
-                
-            filter="raw"
-            first="0"
-            last="1"
-            step="5" /> 
-
-       <field name="checkbox" type="checkbox"
-                
-            label="COM_DIARY_FORM_LBL_DIARYITEM_CHECKBOX"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_CHECKBOX" 
-                
-                
-                
-            value="0"
-            filter="raw" /> 
+       <field name="created_by" type="createdby" default="" 
+            label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
+            description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
 
          <field
         name="state"
@@ -94,9 +70,6 @@
         <option value="1">JPUBLISHED</option>
         <option value="0">JUNPUBLISHED</option>
     </field> 
-
-                        <field name="checked_out" type="hidden" filter="unset" />
-        <field name="checked_out_time" type="hidden" filter="unset" /> 
 
  </fieldset> 
 

@@ -20,59 +20,59 @@ defined('_JEXEC') or die;
 <div class="items">
     <ul class="items_list">
 <?php $show = false; ?>
-        <?php foreach ($this->items as $item) : ?>
+        <?php foreach ($this->items as $item) : ?>        
 
-            
-				<?php
-					if($item->state == 1 || ($item->state == 0 && JFactory::getUser()->authorise('core.edit.own',' com_diary.diaryitem.'.$item->id))):
+<?php
+$user = JFactory::getUser();
+$loginuser = $user->id;
+$owner = $item->owner;
+// echo $loginuser.'-'.$owner;
+if ($loginuser == $owner){
+    $allowEdit = 1;
+    $allowState = 1;
+    $allowDelete = 1;
+} else {
+    $allowEdit = 0;
+    $allowState = 0;
+    $allowDelete = 0;
+}
+					if($item->state == 1 || ($item->state == 0 && $allowEdit)):
 						$show = true;
 						?>
 							<li>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $item->dname; ?></a>
-								<?php
-									if(JFactory::getUser()->authorise('core.edit.state','com_diary.diaryitem.'.$item->id)):
-									?>
+							<?php if(!$allowEdit): ?>
+								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $item->date . ' ' .$item->title . ':'; ?></a>
+							<?php else: ?>
+								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $item->date . ' ' .$item->title . ':'; ?></a>
+							<?php endif; ?>
+							<?php if($allowState): ?>
 										<a href="javascript:document.getElementById('form-diaryitem-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); endif; ?></a>
 										<form id="form-diaryitem-state-<?php echo $item->id ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
-											<input type="hidden" name="jform[ordering]" value="<?php echo $item->ordering; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo (int)!((int)$item->state); ?>" />
-											<input type="hidden" name="jform[checked_out]" value="<?php echo $item->checked_out; ?>" />
-											<input type="hidden" name="jform[checked_out_time]" value="<?php echo $item->checked_out_time; ?>" />
-											<input type="hidden" name="jform[dname]" value="<?php echo $item->dname; ?>" />
-											<input type="hidden" name="jform[ditemdate]" value="<?php echo $item->ditemdate; ?>" />
+											<input type="hidden" name="jform[owner]" value="<?php echo $item->owner; ?>" />
+											<input type="hidden" name="jform[date]" value="<?php echo $item->date; ?>" />
+											<input type="hidden" name="jform[title]" value="<?php echo $item->title; ?>" />
 											<input type="hidden" name="jform[notes]" value="<?php echo $item->notes; ?>" />
-											<input type="hidden" name="jform[createdby]" value="<?php echo $item->createdby; ?>" />
-											<input type="hidden" name="jform[created]" value="<?php echo $item->created; ?>" />
-											<input type="hidden" name="jform[updated]" value="<?php echo $item->updated; ?>" />
-											<input type="hidden" name="jform[fileupload]" value="<?php echo $item->fileupload; ?>" />
-											<input type="hidden" name="jform[dint]" value="<?php echo $item->dint; ?>" />
-											<input type="hidden" name="jform[checkbox]" value="<?php echo $item->checkbox; ?>" />
+											<input type="hidden" name="jform[dog]" value="<?php echo $item->dog; ?>" />
 											<input type="hidden" name="option" value="com_diary" />
 											<input type="hidden" name="task" value="diaryitem.save" />
 											<?php echo JHtml::_('form.token'); ?>
 										</form>
 									<?php
 									endif;
-									if(JFactory::getUser()->authorise('core.delete','com_diary.diaryitem.'.$item->id)):
+									if($allowDelete):
 									?>
 										<a href="javascript:deleteItem(<?php echo $item->id; ?>);"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
 										<form id="form-diaryitem-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
-											<input type="hidden" name="jform[ordering]" value="<?php echo $item->ordering; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo $item->state; ?>" />
-											<input type="hidden" name="jform[checked_out]" value="<?php echo $item->checked_out; ?>" />
-											<input type="hidden" name="jform[checked_out_time]" value="<?php echo $item->checked_out_time; ?>" />
-											<input type="hidden" name="jform[created_by]" value="<?php echo $item->created_by; ?>" />
-											<input type="hidden" name="jform[dname]" value="<?php echo $item->dname; ?>" />
-											<input type="hidden" name="jform[ditemdate]" value="<?php echo $item->ditemdate; ?>" />
+											<input type="hidden" name="jform[owner]" value="<?php echo $item->owner; ?>" />
+											<input type="hidden" name="jform[date]" value="<?php echo $item->date; ?>" />
+											<input type="hidden" name="jform[title]" value="<?php echo $item->title; ?>" />
 											<input type="hidden" name="jform[notes]" value="<?php echo $item->notes; ?>" />
-											<input type="hidden" name="jform[createdby]" value="<?php echo $item->createdby; ?>" />
-											<input type="hidden" name="jform[created]" value="<?php echo $item->created; ?>" />
-											<input type="hidden" name="jform[updated]" value="<?php echo $item->updated; ?>" />
-											<input type="hidden" name="jform[fileupload]" value="<?php echo $item->fileupload; ?>" />
-											<input type="hidden" name="jform[dint]" value="<?php echo $item->dint; ?>" />
-											<input type="hidden" name="jform[checkbox]" value="<?php echo $item->checkbox; ?>" />
+											<input type="hidden" name="jform[dog]" value="<?php echo $item->dog; ?>" />
+											<input type="hidden" name="jform[created_by]" value="<?php echo $item->created_by; ?>" />
 											<input type="hidden" name="option" value="com_diary" />
 											<input type="hidden" name="task" value="diaryitem.remove" />
 											<?php echo JHtml::_('form.token'); ?>

@@ -89,10 +89,7 @@ $lang->load('com_diary', JPATH_ADMINISTRATOR);
         js = jQuery.noConflict();
         js(document).ready(function(){
             js('#form-dogdetail').submit(function(event){
-                
-				if(js('#jform_fileupload').val() != ''){
-					js('#jform_fileupload_hidden').val(js('#jform_fileupload').val());
-				} 
+                 
             }); 
         
             

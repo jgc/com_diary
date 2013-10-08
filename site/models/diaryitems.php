@@ -47,9 +47,6 @@ class DiaryModelDiaryitems extends JModelList {
         $this->setState('list.start', $limitstart);
 
         
-		if(empty($ordering)) {
-			$ordering = 'a.ordering';
-		}
 
         // List state information.
         parent::populateState($ordering, $direction);
@@ -74,19 +71,10 @@ class DiaryModelDiaryitems extends JModelList {
         );
 
         $query->from('`#__diaryitems` AS a');
-
-        
-    // Join over the users for the checked out user.
-    $query->select('uc.name AS editor');
-    $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
-    
-		// Join over the created by field 'created_by'
-		$query->select('created_by.name AS created_by');
-		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-		// Join over the created by field 'createdby'
-		$query->select('createdby.name AS createdby');
-		$query->join('LEFT', '#__users AS createdby ON createdby.id = a.createdby');
-        
+	// Join over the created by field 'created_by'
+	$query->select('created_by.name AS created_by');
+	$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+        $query->order('a.date DESC, a.title ASC');
 
         // Filter by search in title
         $search = $this->getState('filter.search');
@@ -95,30 +83,20 @@ class DiaryModelDiaryitems extends JModelList {
                 $query->where('a.id = ' . (int) substr($search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
-                $query->where('( a.dname LIKE '.$search.'  OR  a.notes LIKE '.$search.' )');
+                $query->where('( a.title LIKE '.$search.'  OR  a.notes LIKE '.$search.'  OR  a.dog LIKE '.$search.' )');
             }
         }
 
         
 
-		//Filtering ditemdate
-		$filter_ditemdate_from = $this->state->get("filter.ditemdate.from");
-		if ($filter_ditemdate_from) {
-			$query->where("a.ditemdate >= '".$filter_ditemdate_from."'");
+		//Filtering date
+		$filter_date_from = $this->state->get("filter.date.from");
+		if ($filter_date_from) {
+			$query->where("a.date >= '".$filter_date_from."'");
 		}
-		$filter_ditemdate_to = $this->state->get("filter.ditemdate.to");
-		if ($filter_ditemdate_to) {
-			$query->where("a.ditemdate <= '".$filter_ditemdate_to."'");
-		}
-
-		//Filtering created
-		$filter_created_from = $this->state->get("filter.created.from");
-		if ($filter_created_from) {
-			$query->where("a.created >= '".$filter_created_from."'");
-		}
-		$filter_created_to = $this->state->get("filter.created.to");
-		if ($filter_created_to) {
-			$query->where("a.created <= '".$filter_created_to."'");
+		$filter_date_to = $this->state->get("filter.date.to");
+		if ($filter_date_to) {
+			$query->where("a.date <= '".$filter_date_to."'");
 		}
 
         return $query;

@@ -89,10 +89,7 @@ $lang->load('com_diary', JPATH_ADMINISTRATOR);
         js = jQuery.noConflict();
         js(document).ready(function(){
             js('#form-diaryitem').submit(function(event){
-                
-				if(js('#jform_fileupload').val() != ''){
-					js('#jform_fileupload_hidden').val(js('#jform_fileupload').val());
-				} 
+                 
             }); 
         
             
@@ -101,110 +98,69 @@ $lang->load('com_diary', JPATH_ADMINISTRATOR);
     
 </script>
 
+<?php
+$user = JFactory::getUser();
+$loginuser = $user->id;
+$owner = $this->item->owner;
+//echo $loginuser.'-'.$owner;
+if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
+    $allowEdit = 1;
+    $allowState = 1;
+    $allowDelete = 1;
+} else {
+    $allowEdit = 0;
+    $allowState = 0;
+    $allowDelete = 0;
+}
+
+				
+?>
+
+<?php if($allowEdit): ?>
+
 <div class="diaryitem-edit front-end-edit">
     <?php if (!empty($this->item->id)): ?>
-        <h1>Edit <?php echo $this->item->id; ?></h1>
+        <h1>Edit Item <?php echo $this->item->id; ?></h1>
     <?php else: ?>
-        <h1>Add</h1>
+        <h1>Add a new diary entry</h1>
     <?php endif; ?>
-
+    
     <form id="form-diaryitem" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
         <ul>
-            			<div class="control-group">
+            		<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 			</div>
-
 			<div class="control-group">
-				<?php $canState = false; ?>
-				<?php if($this->item->id): ?>
-					<?php $canState = $canState = JFactory::getUser()->authorise('core.edit.state','com_diary.diaryitem'); ?>
-				<?php else: ?>
-					<?php $canState = JFactory::getUser()->authorise('core.edit.state','com_diary.diaryitem.'.$this->item->id); ?>
-				<?php endif; ?>				<?php if(!$canState): ?>
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
-					<?php
-						$state_string = 'Unpublish';
-						$state_value = 0;
-						if($this->item->state == 1):
-							$state_string = 'Publish';
-							$state_value = 1;
-						endif;
-					?>
-					<div class="controls"><?php echo $state_string; ?></div>
-					<input type="hidden" name="jform[state]" value="<?php echo $state_value; ?>" />
-				<?php else: ?>
-					<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('state'); ?></div>					<?php endif; ?>
-				</div>
+				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
+			</div>
+			<?php if (!$this->item->id): ?>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
+				<div class="controls"><input type="hidden" name="jform[owner]" value="<?php echo $loginuser; ?>" /></div>
+			</div>
+			<?php endif; ?>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('date'); ?></div> 
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('dname'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('dname'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('ditemdate'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('ditemdate'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('notes'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('notes'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('createdby'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('createdby'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('dog'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('dog'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('created'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('created'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('updated'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('updated'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('fileupload'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('fileupload'); ?></div>
-			</div>
-
-				<?php if (!empty($this->item->fileupload)) : ?>
-						<a href="<?php echo JRoute::_(JUri::base() . 'administrator' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_diary' . DIRECTORY_SEPARATOR . 'dfiles' .DIRECTORY_SEPARATOR . $this->item->fileupload, false);?>"><?php echo JText::_("COM_DIARY_VIEW_FILE"); ?></a>
-				<?php endif; ?>
-				<input type="hidden" name="jform[fileupload]" id="jform_fileupload_hidden" value="<?php echo $this->item->fileupload ?>" />			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('dint'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('dint'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('checkbox'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('checkbox'); ?></div>
-			</div>
-				<div class="fltlft" <?php if (!JFactory::getUser()->authorise('core.admin','diary')): ?> style="display:none;" <?php endif; ?> >
-                <?php echo JHtml::_('sliders.start', 'permissions-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-                <?php echo JHtml::_('sliders.panel', JText::_('ACL Configuration'), 'access-rules'); ?>
-                <fieldset class="panelform">
-                    <?php echo $this->form->getLabel('rules'); ?>
-                    <?php echo $this->form->getInput('rules'); ?>
-                </fieldset>
-                <?php echo JHtml::_('sliders.end'); ?>
-            </div>
-				<?php if (!JFactory::getUser()->authorise('core.admin','diary')): ?>
-                <script type="text/javascript">
-                    jQuery.noConflict();
-                    jQuery('.tab-pane select').each(function(){
-                       var option_selected = jQuery(this).find(':selected');
-                       var input = document.createElement("input");
-                       input.setAttribute("type", "hidden");
-                       input.setAttribute("name", jQuery(this).attr('name'));
-                       input.setAttribute("value", option_selected.val());
-                       document.getElementById("form-diaryitem").appendChild(input);
-                       jQuery(this).attr('disabled',true);
-                    });
-                </script>
-             <?php endif; ?>
-        </ul>
+		</ul>
 
         <div>
             <button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
@@ -216,4 +172,12 @@ $lang->load('com_diary', JPATH_ADMINISTRATOR);
             <?php echo JHtml::_('form.token'); ?>
         </div>
     </form>
+    <?php else: ?>
+    <div class="diaryitem-edit front-end-edit">
+    <?php
+            $error = JText::_('COM_DIARY_ITEM_NOT_LOADED');
+            JFactory::getApplication()->redirect(JURI::base(), $error, 'error' );
+            return false;
+            ?>
+    <?php endif; ?>
 </div>
