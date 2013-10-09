@@ -27,6 +27,7 @@ if ($pheading != ""){
     echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
 } else {
     echo '<h1>Diary entry '.$this->item->id.'</h1>';
+    echo '<h1>Diary entry</h1>';
 }
 ?>
 
