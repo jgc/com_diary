@@ -122,13 +122,15 @@ if ((empty($pheading)) and (empty($this->item->id))) {
 $nheading = '<h1>Add diary entry</h1>';}
 
 if ((empty($pheading)) and (!empty($this->item->id))) {
-$nheading = '<h1>Edit diary entry '.$this->item->id.'</h1>';}
+//$nheading = '<h1>Edit diary entry '.$this->item->id.'</h1>';}
+$nheading = '<h1>Edit diary entry</h1>';}
 
 if ((!empty($pheading)) and (empty($this->item->id))) {
 $nheading = '<h1>Add '.$pheading.'</h1>';}
 
 if ((!empty($pheading)) and (!empty($this->item->id))) {
-$nheading = '<h1>Edit '.$pheading.' '.$this->item->id.'</h1>';}
+//$nheading = '<h1>Edit '.$pheading.' '.$this->item->id.'</h1>';}
+$nheading = '<h1>Edit '.$pheading.'</h1>';}
 
 echo $nheading;
 ?>
