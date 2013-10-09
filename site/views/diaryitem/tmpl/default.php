@@ -41,7 +41,7 @@ $allowView = 1;
 } else {
 $allowView = 0;
 }
-echo $allowView;
+//echo $allowView;
 //echo $loginuser.'-'.$owner;
 if ($loginuser == $owner){
     $allowEdit = 1;
