@@ -24,10 +24,10 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_diary' . $
 $pheading = "";
 
 if ($pheading != ""){
-    echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
+    echo '<h2 class="item-title">'.$active->page_heading.' '.$this->item->id.'</h2>';
 } else {
-    echo '<h1>Diary entry '.$this->item->id.'</h1>';
-    echo '<h1>Diary entry</h1>';
+    echo '<h2 class="item-title">Diary entry '.$this->item->id.'</h2>';
+    echo '<h2 class="item-title">Diary entry</h2>';
 }
 ?>
 

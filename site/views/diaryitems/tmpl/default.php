@@ -20,9 +20,9 @@ defined('_JEXEC') or die;
 <?php 
 $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
 if ($pheading != ""){
-    echo '<h1>'.$pheading.'</h1>';
+    echo '<h2 class="item-title">'.$pheading.'</h2>';
 } else {
-    echo '<h1>Diary entries</h1>';
+    echo '<h2 class="item-title">Diary entries</h2>';
 }
 ?>
 

@@ -119,18 +119,18 @@ if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
 $pheading = "";
 
 if ((empty($pheading)) and (empty($this->item->id))) {
-$nheading = '<h1>Add diary entry</h1>';}
+$nheading = '<h2 class="item-title">Add diary entry</h2>';}
 
 if ((empty($pheading)) and (!empty($this->item->id))) {
 //$nheading = '<h1>Edit diary entry '.$this->item->id.'</h1>';}
-$nheading = '<h1>Edit diary entry</h1>';}
+$nheading = '<h2 class="item-title">Edit diary entry</h2>';}
 
 if ((!empty($pheading)) and (empty($this->item->id))) {
-$nheading = '<h1>Add '.$pheading.'</h1>';}
+$nheading = '<h2 class="item-title">Add '.$pheading.'</h2>';}
 
 if ((!empty($pheading)) and (!empty($this->item->id))) {
 //$nheading = '<h1>Edit '.$pheading.' '.$this->item->id.'</h1>';}
-$nheading = '<h1>Edit '.$pheading.'</h1>';}
+$nheading = '<h2 class="item-title">Edit '.$pheading.'</h2>';}
 
 echo $nheading;
 ?>
