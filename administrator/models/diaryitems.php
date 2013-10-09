@@ -74,7 +74,7 @@ class DiaryModeldiaryitems extends JModelList {
         $this->setState('params', $params);
 
         // List state information.
-        parent::populateState('a.dname', 'asc');
+        parent::populateState('a.title', 'asc');
     }
 
     /**

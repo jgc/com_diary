@@ -65,46 +65,25 @@ $document->addStyleSheet('components/com_diary/assets/css/diary.css');
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('dname'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('dname'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('ditemdate'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('ditemdate'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('date'); ?></div>
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('notes'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('notes'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('createdby'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('createdby'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('owner'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('owner'); ?></div>
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created'); ?></div>
 			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('updated'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('updated'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('fileupload'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('fileupload'); ?></div>
-			</div>
-
-				<?php if (!empty($this->item->fileupload)) : ?>
-						<a href="<?php echo JRoute::_(JUri::base() . 'components' . DIRECTORY_SEPARATOR . 'com_diary' . DIRECTORY_SEPARATOR . 'dfiles' .DIRECTORY_SEPARATOR . $this->item->fileupload, false);?>">[View File]</a>
-				<?php endif; ?>
-				<input type="hidden" name="jform[fileupload]" id="jform_fileupload_hidden" value="<?php echo $this->item->fileupload ?>" />			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('dint'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('dint'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('checkbox'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('checkbox'); ?></div>
-			</div>
-
 
             </fieldset>
         </div>

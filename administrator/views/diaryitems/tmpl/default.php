@@ -114,33 +114,21 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_DNAME', 'a.dname', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_DITEMDATE', 'a.ditemdate', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_DATE', 'a.date', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_NOTES', 'a.notes', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_CREATEDBY', 'a.createdby', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_OWNER', 'a.owner', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_CREATED', 'a.created', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_NAMEID', 'a.nameid', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_UPDATED', 'a.updated', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_FILEUPLOAD', 'a.fileupload', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_DINT', 'a.dint', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DIARY_DIARYITEMS_CHECKBOX', 'a.checkbox', $listDirn, $listOrder); ?>
-				</th>
-                    
+                   
                     
                 <?php if (isset($this->items[0]->id)): ?>
 					<th width="1%" class="nowrap center hidden-phone">
@@ -213,9 +201,9 @@ if (!empty($this->extra_sidebar)) {
 				<?php endif; ?>
 				<?php if ($canEdit) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id='.(int) $item->id); ?>">
-					<?php echo $this->escape($item->dname); ?></a>
+					<?php echo $this->escape($item->title); ?></a>
 				<?php else : ?>
-					<?php echo $this->escape($item->dname); ?>
+					<?php echo $this->escape($item->title); ?>
 				<?php endif; ?>
 				</td>
 				<td>
