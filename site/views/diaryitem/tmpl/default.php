@@ -19,7 +19,10 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_diary' . $
 ?>
 
 <?php 
-$pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
+// $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' neither work reliably, see viewdiaryform
+// FIX
+$pheading = "";
+
 if ($pheading != ""){
     echo '<h1>'.$active->page_heading.' '.$this->item->id.'</h1>';
 } else {
@@ -31,6 +34,14 @@ if ($pheading != ""){
 $user = JFactory::getUser();
 $loginuser = $user->id;
 $owner = $this->item->owner;
+$published = $this->item->state;
+$allowView = 0;
+if ($published == 1){
+$allowView = 1;
+} else {
+$allowView = 0;
+}
+echo $allowView;
 //echo $loginuser.'-'.$owner;
 if ($loginuser == $owner){
     $allowEdit = 1;
@@ -40,10 +51,11 @@ if ($loginuser == $owner){
     $allowEdit = 0;
     $allowState = 0;
     $allowDelete = 0;
+    
 }
 ?>
 
-<?php if ($this->item && $allowEdit): ?>
+<?php if ($this->item && ($allowView)): ?>
 
     <div class="item_fields">
 
@@ -73,7 +85,7 @@ if ($loginuser == $owner){
     <?php if($canEdit): ?>
 		<a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id='.$this->item->id); ?>"><?php echo JText::_("COM_DIARY_EDIT_ITEM"); ?></a>
 	<?php endif; ?>
-								<?php if($allowDelete):
+								<?php if($allowDeleteX): //FIX - remove all together
 								?>
 									<a href="javascript:document.getElementById('form-diaryitem-delete-<?php echo $this->item->id ?>').submit()"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
 									<form id="form-diaryitem-delete-<?php echo $this->item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
