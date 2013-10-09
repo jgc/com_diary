@@ -111,24 +111,26 @@ if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
     $allowEdit = 0;
     $allowState = 0;
     $allowDelete = 0;
-}		
-?>
+}	
 
-<?php 
-$pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
-if ($pheading == ""){
-        if (!empty($this->item->id)){
-	    echo '<h1>Edit diary entry '.$this->item->id.'</h1>';
-        } else {
-	    echo '<h1>Add diary entry</h1>';
-	}
-if ($pheading != ""){
-        if (!empty($this->item->id)){
-	    echo '<h1> Edit '.$pheading.' '.$this->item->id.'</h1>';
-        } else {
-	    echo '<h1> Add '.$pheading.'</h1>';
-	}
-}
+//$pheading = $this->params->get('page_heading', ''); //does not work consistently, appears to pull in language string??
+// $pheading = $active->page_heading; //does not work
+// FIX
+$pheading = "";
+
+if ((empty($pheading)) and (empty($this->item->id))) {
+$nheading = '<h1>Add diary entry</h1>';}
+
+if ((empty($pheading)) and (!empty($this->item->id))) {
+$nheading = '<h1>Edit diary entry '.$this->item->id.'</h1>';}
+
+if ((!empty($pheading)) and (empty($this->item->id))) {
+$nheading = '<h1>Add '.$pheading.'</h1>';}
+
+if ((!empty($pheading)) and (!empty($this->item->id))) {
+$nheading = '<h1>Edit '.$pheading.' '.$this->item->id.'</h1>';}
+
+echo $nheading;
 ?>
 
 <?php if($allowEdit): ?>
@@ -145,11 +147,9 @@ if ($pheading != ""){
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
 			</div>
-			<?php if (!$this->item->id): ?>
-			<div class="control-group">
-				<div class="controls"><input type="hidden" name="jform[owner]" value="<?php echo $loginuser; ?>" /></div>
-			</div>
-			<?php endif; ?>
+			<?php if(!$this->item->id){
+			echo '<div class="controls"><input type="hidden" name="jform[owner]" value="'. $loginuser .'/></div>';
+			} ?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('date'); ?></div> 
@@ -189,5 +189,5 @@ if ($pheading != ""){
             JFactory::getApplication()->redirect(JURI::base(), $error, 'error' );
             return false;
             ?>
+	</div>
     <?php endif; ?>
-</div>
