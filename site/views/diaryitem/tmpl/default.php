@@ -59,29 +59,26 @@ if ($loginuser == $owner){
 
     <div class="item_fields">
 
-        <ul class="fields_list">
+			<br/>
+			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DATE') . '</strong>'; ?>
+			<?php echo $this->item->date; ?>
+			
+			<?php if (!empty($this->nameid)): ?>
+			<?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
+			<?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DOG') . '</strong>'; ?>
+			<?php echo $this->item->nameid; ?></div>
+			<?php endif; ?>
 
-            		<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_ID'); ?>:
-			<?php echo $this->item->id; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_STATE'); ?>:
-			<?php echo $this->item->state; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_OWNER'); ?>:
-			<?php echo $this->item->owner; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DATE'); ?>:
-			<?php echo $this->item->date; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_TITLE'); ?>:
-			<?php echo $this->item->title; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_NOTES'); ?>:
-			<?php echo $this->item->notes; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DOG'); ?>:
-			<?php echo $this->item->dog; ?></li>
-			<li><?php echo JText::_('COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY'); ?>:
-			<?php echo $this->item->created_by; ?></li>
+			</div><br/>
 
-
-        </ul>
-
-    </div>
+			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_TITLE') . '</strong>'; ?>
+			<?php echo $this->item->title; ?></div><br/>
+			
+			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_NOTES') . '</strong>'; ?><br/>
+			<?php echo $this->item->notes; ?></div>
+			
+   </div>
+   
     <?php if($canEdit): ?>
 		<a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id='.$this->item->id); ?>"><?php echo JText::_("COM_DIARY_EDIT_ITEM"); ?></a>
 	<?php endif; ?>
