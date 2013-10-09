@@ -111,15 +111,9 @@ if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
     $allowEdit = 0;
     $allowState = 0;
     $allowDelete = 0;
-}
-
-				
+}		
 ?>
 
-<?php if($allowEdit): ?>
-
-<div class="diaryitem-edit front-end-edit">
-    
 <?php 
 $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
 if ($pheading == ""){
@@ -137,7 +131,10 @@ if ($pheading != ""){
 }
 ?>
 
-    
+<?php if($allowEdit): ?>
+
+<div class="diaryitem-edit front-end-edit"> 
+   
     <form id="form-diaryitem" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
         <ul>
             		<div class="control-group">
