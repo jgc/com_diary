@@ -27,7 +27,7 @@ if ($pheading != ""){
 ?>
 
 <div class="items">
-    <ul class="items_list">
+
 <?php $show = false; ?>
 
 <?php foreach ($this->items as $item) : ?>        
@@ -49,8 +49,9 @@ if ($loginuser == $owner){
 					if($item->state == 1 || ($item->state == 0 && $allowEdit)):
 						$show = true;
 						?>
-							<li>
+						    <div>
 							<?php if(!$allowEdit): ?>
+							
 							<?php
 							$display = $item->date . ' ';
 							if (!empty($item->title))
@@ -61,10 +62,15 @@ if ($loginuser == $owner){
 							{
 							$display .= ' with ' . $item->nameid;    
 							}
-							if (!empty($item->owner))
+							if ((!empty($item->nameid) and (!empty($item->owner)))
 							{
 							$display .= ' and ' . $item->owner;    
 							}
+							if ((empty($item->nameid) and (!empty($item->owner)))
+							{
+							$display .= ' with ' . $item->owner;    
+							}
+							$display .= '   ';
 							?>
 								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
 							<?php else: ?>
@@ -105,7 +111,7 @@ if ($loginuser == $owner){
 									<?php
 									endif;
 								?>
-							</li>
+							</div>
 						<?php endif; ?>
 
 <?php endforeach; ?>
@@ -114,7 +120,7 @@ if ($loginuser == $owner){
             echo JText::_('COM_DIARY_NO_ITEMS');
         endif;
         ?>
-    </ul>
+
 </div>
 <?php if ($show): ?>
     <div class="pagination">

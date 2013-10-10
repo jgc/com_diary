@@ -13,30 +13,30 @@
 
 <field name="dob" 
     type="calendar" 
-            label="COM_DIARY_FORM_LBL_DIARYNAME_DATE"
-            description="COM_DIARY_FORM_DESC_DIARYNAME_DATE" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_DOB"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_DOB" 
     format="%Y-%m-%d"
     required="true"
     default="now"
     filter="user_utc" />
     
     <field name="pname" type="text"            
-            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
-            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_PNAME"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_PNAME" 
             filter="safehtml"
             size="20"
             maxlength="25" />
     
     <field name="rname" type="text"            
-            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
-            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_RNAME"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_RNAME" 
             filter="safehtml"
             size="20"
             maxlength="25" /> 
 
        <field name="rnumber" type="text"            
-            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
-            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_RNUMBER"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_RNUMBER" 
             filter="safehtml"
             size="20"
             maxlength="25" /> 

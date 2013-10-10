@@ -27,7 +27,7 @@ if ($pheading != ""){
 ?>
 
 <div class="items">
-    <ul class="items_list">
+
 <?php $show = false; ?>
 
 <?php foreach ($this->items as $item) : ?>        
@@ -49,12 +49,24 @@ if ($loginuser == $owner){
 					if($item->state == 1 || ($item->state == 0 && $allowEdit)):
 						$show = true;
 						?>
-							<li>
+						    <div>
 							<?php if(!$allowEdit): ?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryname&id=' . (int)$item->id); ?>"><?php echo $item->date . ' ' .$item->title . ':'; ?></a>
+							<?php
+							$display = $item->date . ' ';
+							if (!empty($item->pname))
+							{
+							$display .= $item->pname;    
+							}
+							if (!empty($item->nameid))
+							{
+							$display .= '   ';
+							?>
+							
+								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryname&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
 							<?php else: ?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diarynameform&id=' . (int)$item->id); ?>"><?php echo $item->date . ' ' .$item->title . ':'; ?></a>
+								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diarynameform&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
 							<?php endif; ?>
+
 							<?php if($allowState): ?>
 										<a href="javascript:document.getElementById('form-diaryname-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); endif; ?></a>
 										<form id="form-diaryname-state-<?php echo $item->id ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
@@ -93,7 +105,7 @@ if ($loginuser == $owner){
 									<?php
 									endif;
 								?>
-							</li>
+							</div>
 						<?php endif; ?>
 
 <?php endforeach; ?>
