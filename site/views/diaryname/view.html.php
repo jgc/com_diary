@@ -15,7 +15,7 @@ jimport('joomla.application.component.view');
 /**
  * View to edit
  */
-class DiaryViewDogdetail extends JViewLegacy {
+class DiaryViewDiaryname extends JViewLegacy {
 
     protected $state;
     protected $item;
@@ -31,9 +31,10 @@ class DiaryViewDogdetail extends JViewLegacy {
         $user		= JFactory::getUser();
         
         $this->state = $this->get('State');
-        
+        $this->item = $this->get('Data');
         $this->params = $app->getParams('com_diary');
    		
+		$this->form		= $this->get('Form');
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {

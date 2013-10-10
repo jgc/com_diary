@@ -13,9 +13,9 @@ defined('_JEXEC') or die;
 require_once JPATH_COMPONENT.'/controller.php';
 
 /**
- * Dogdetail controller class.
+ * Diaryname controller class.
  */
-class DiaryControllerDogdetailForm extends DiaryController
+class DiaryControllerDiarynameForm extends DiaryController
 {
 
 	/**
@@ -28,14 +28,14 @@ class DiaryControllerDogdetailForm extends DiaryController
 		$app			= JFactory::getApplication();
 
 		// Get the previous edit id (if any) and the current edit id.
-		$previousId = (int) $app->getUserState('com_diary.edit.dogdetail.id');
+		$previousId = (int) $app->getUserState('com_diary.edit.diaryname.id');
 		$editId	= JFactory::getApplication()->input->getInt('id', null, 'array');
 
 		// Set the user id for the user to edit in the session.
-		$app->setUserState('com_diary.edit.dogdetail.id', $editId);
+		$app->setUserState('com_diary.edit.diaryname.id', $editId);
 
 		// Get the model.
-		$model = $this->getModel('DogdetailForm', 'DiaryModel');
+		$model = $this->getModel('DiarynameForm', 'DiaryModel');
 
 		// Check out the item
 		if ($editId) {
@@ -48,7 +48,7 @@ class DiaryControllerDogdetailForm extends DiaryController
 		}
 
 		// Redirect to the edit screen.
-		$this->setRedirect(JRoute::_('index.php?option=com_diary&view=dogdetail&layout=edit', false));
+		$this->setRedirect(JRoute::_('index.php?option=com_diary&view=diaryname&layout=edit', false));
 	}
 
 	/**
@@ -64,7 +64,7 @@ class DiaryControllerDogdetailForm extends DiaryController
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
-		$model = $this->getModel('DogdetailForm', 'DiaryModel');
+		$model = $this->getModel('DiarynameForm', 'DiaryModel');
 
 		// Get the user data.
 		$data = JFactory::getApplication()->input->get('jform', array(), 'array');
@@ -94,11 +94,11 @@ class DiaryControllerDogdetailForm extends DiaryController
 			}
 
 			// Save the data in the session.
-			$app->setUserState('com_diary.edit.dogdetail.data', JRequest::getVar('jform'),array());
+			$app->setUserState('com_diary.edit.diaryname.data', JRequest::getVar('jform'),array());
 
 			// Redirect back to the edit screen.
-			$id = (int) $app->getUserState('com_diary.edit.dogdetail.id');
-			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=dogdetailform&layout=edit&id='.$id, false));
+			$id = (int) $app->getUserState('com_diary.edit.diaryname.id');
+			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=diarynameform&layout=edit&id='.$id, false));
 			return false;
 		}
 
@@ -108,12 +108,12 @@ class DiaryControllerDogdetailForm extends DiaryController
 		// Check for errors.
 		if ($return === false) {
 			// Save the data in the session.
-			$app->setUserState('com_diary.edit.dogdetail.data', $data);
+			$app->setUserState('com_diary.edit.diaryname.data', $data);
 
 			// Redirect back to the edit screen.
-			$id = (int)$app->getUserState('com_diary.edit.dogdetail.id');
+			$id = (int)$app->getUserState('com_diary.edit.diaryname.id');
 			$this->setMessage(JText::sprintf('Save failed', $model->getError()), 'warning');
-			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=dogdetailform&layout=edit&id='.$id, false));
+			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=diarynameform&layout=edit&id='.$id, false));
 			return false;
 		}
 
@@ -124,7 +124,7 @@ class DiaryControllerDogdetailForm extends DiaryController
         }
         
         // Clear the profile id from the session.
-        $app->setUserState('com_diary.edit.dogdetail.id', null);
+        $app->setUserState('com_diary.edit.diaryname.id', null);
 
         // Redirect to the list screen.
         $this->setMessage(JText::_('COM_DIARY_ITEM_SAVED_SUCCESSFULLY'));
@@ -133,7 +133,7 @@ class DiaryControllerDogdetailForm extends DiaryController
         $this->setRedirect(JRoute::_($item->link, false));
 
 		// Flush the data from the session.
-		$app->setUserState('com_diary.edit.dogdetail.data', null);
+		$app->setUserState('com_diary.edit.diaryname.data', null);
 	}
     
     
@@ -150,7 +150,7 @@ class DiaryControllerDogdetailForm extends DiaryController
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
-		$model = $this->getModel('DogdetailForm', 'DiaryModel');
+		$model = $this->getModel('DiarynameForm', 'DiaryModel');
 
 		// Get the user data.
 		$data = JFactory::getApplication()->input->get('jform', array(), 'array');
@@ -180,11 +180,11 @@ class DiaryControllerDogdetailForm extends DiaryController
 			}
 
 			// Save the data in the session.
-			$app->setUserState('com_diary.edit.dogdetail.data', $data);
+			$app->setUserState('com_diary.edit.diaryname.data', $data);
 
 			// Redirect back to the edit screen.
-			$id = (int) $app->getUserState('com_diary.edit.dogdetail.id');
-			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=dogdetail&layout=edit&id='.$id, false));
+			$id = (int) $app->getUserState('com_diary.edit.diaryname.id');
+			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=diaryname&layout=edit&id='.$id, false));
 			return false;
 		}
 
@@ -194,12 +194,12 @@ class DiaryControllerDogdetailForm extends DiaryController
 		// Check for errors.
 		if ($return === false) {
 			// Save the data in the session.
-			$app->setUserState('com_diary.edit.dogdetail.data', $data);
+			$app->setUserState('com_diary.edit.diaryname.data', $data);
 
 			// Redirect back to the edit screen.
-			$id = (int)$app->getUserState('com_diary.edit.dogdetail.id');
+			$id = (int)$app->getUserState('com_diary.edit.diaryname.id');
 			$this->setMessage(JText::sprintf('Delete failed', $model->getError()), 'warning');
-			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=dogdetail&layout=edit&id='.$id, false));
+			$this->setRedirect(JRoute::_('index.php?option=com_diary&view=diaryname&layout=edit&id='.$id, false));
 			return false;
 		}
 
@@ -210,7 +210,7 @@ class DiaryControllerDogdetailForm extends DiaryController
         }
         
         // Clear the profile id from the session.
-        $app->setUserState('com_diary.edit.dogdetail.id', null);
+        $app->setUserState('com_diary.edit.diaryname.id', null);
 
         // Redirect to the list screen.
         $this->setMessage(JText::_('COM_DIARY_ITEM_DELETED_SUCCESSFULLY'));
@@ -219,7 +219,7 @@ class DiaryControllerDogdetailForm extends DiaryController
         $this->setRedirect(JRoute::_($item->link, false));
 
 		// Flush the data from the session.
-		$app->setUserState('com_diary.edit.dogdetail.data', null);
+		$app->setUserState('com_diary.edit.diaryname.data', null);
 	}
     
     

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @version     1.0.0
  * @package     com_diary
@@ -7,55 +6,42 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  * @author      FalcoAccipiter <admin@falcoaccipiter.com> - http://www.falcoaccipiter.com
  */
+
 // No direct access
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
 /**
- * View to edit
+ * View class for a list of Diary.
  */
-class DiaryViewDiaryitemsum extends JViewLegacy {
-
-    protected $state;
-    protected $item;
-    protected $form;
+class DiaryViewDiarynames extends JViewLegacy
+{
+	protected $items;
+	protected $pagination;
+	protected $state;
     protected $params;
 
-    /**
-     * Display the view
-     */
-    public function display($tpl = null) {
+	/**
+	 * Display the view
+	 */
+	public function display($tpl = null)
+	{
+        $app                = JFactory::getApplication();
         
-	$app		= JFactory::getApplication();
-        $user		= JFactory::getUser();
+        $this->state		= $this->get('State');
+        $this->items		= $this->get('Items');
+        $this->pagination	= $this->get('Pagination');
+        $this->params       = $app->getParams('com_diary');
         
-        $this->state 	= $this->get('State');
-        $this->item 	= $this->get('Data');
-        $this->params 	= $app->getParams('com_diary');
-   		
-	$this->form	= $this->get('Form');
-
         // Check for errors.
-        if (count($errors = $this->get('Errors'))) {
+        if (count($errors = $this->get('Errors'))) {;
             throw new Exception(implode("\n", $errors));
         }
         
-        
-        
-        if($this->_layout == 'edit') {
-            
-            $authorised = $user->authorise('core.create', 'com_diary');
-
-            if ($authorised !== true) {
-                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
-            }
-        }
-        
         $this->_prepareDocument();
-
         parent::display($tpl);
-    }
+	}
 
 
 	/**
@@ -102,6 +88,6 @@ class DiaryViewDiaryitemsum extends JViewLegacy {
 		{
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
-	}        
-    
+	}    
+    	
 }

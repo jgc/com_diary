@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="COM_DIARY_FORM_LBL_DIARYNAME_ID"
+            readonly="true" class="readonly"
+            description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="owner" type="user"
+                
+            label="COM_DIARY_FORM_LBL_DIARYNAME_OWNER"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_OWNER" 
+                
+                
+                 /> 
+
+       <field name="dob" type="calendar"
+                
+            label="COM_DIARY_FORM_LBL_DIARYNAME_DATE"
+           description="COM_DIARY_FORM_DESC_DIARYNAME_DATE" 
+        required="true" 
+            filter="raw" /> 
+
+       <field name="pname" type="text"
+            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            filter="safehtml"
+            size="20"
+            maxlength="25" /> 
+
+       <field name="rname" type="text"
+            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            filter="safehtml"
+            size="20"
+            maxlength="25" />
+       
+              <field name="rnumber" type="text"
+            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            filter="safehtml"
+            size="20"
+            maxlength="25" />
+	      
+       <field name="notes" type="textarea"  
+            label="COM_DIARY_FORM_LBL_DIARYNAME_NOTES"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_NOTES" 
+            cols="100"
+            rows="8" /> 
+
+       <field name="dog" type="text"
+                
+            label="COM_DIARY_FORM_LBL_DIARYNAME_DOG"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_DOG" 
+                
+                
+                
+            filter="safehtml"
+            size="25"
+            maxlength="255" /> 
+
+       <field name="created_by" type="createdby" default="" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_CREATED_BY"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_CREATED_BY"  /> 
+
+         <field
+        name="state"
+        type="list"
+        label="JSTATUS"
+        description="JFIELD_PUBLISHED_DESC"
+        class="inputbox"
+        size="1"
+        default="1">
+        <option value="1">JPUBLISHED</option>
+        <option value="0">JUNPUBLISHED</option>
+    </field> 
+
+ </fieldset> 
+
+ <fieldset 
+                        name="accesscontrol">
+                       <field name="asset_id" type="hidden" filter="unset" />
+                       <field name="rules"
+                            type="rules"
+                            label="JFIELD_RULES_LABEL"
+                            translate_label="false"
+                            filter="rules"
+                            validate="rules"
+                            class="inputbox"
+                            component="com_diary"
+                            section="diaryitem"
+                        />
+
+	</fieldset>
+
+</form>

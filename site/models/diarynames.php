@@ -14,7 +14,7 @@ jimport('joomla.application.component.modellist');
 /**
  * Methods supporting a list of Diary records.
  */
-class DiaryModelDogdetails extends JModelList {
+class DiaryModelDiarynames extends JModelList {
 
     /**
      * Constructor.
@@ -59,13 +59,50 @@ class DiaryModelDogdetails extends JModelList {
      * @since	1.6
      */
     protected function getListQuery() {
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-		return $query;
-	}
+        // Create a new query object.
+        $db = $this->getDbo();
+        $query = $db->getQuery(true);
 
+        // Select the required fields from the table.
+        $query->select(
+                $this->getState(
+                        'list.select', 'a.*'
+                )
+        );
 
-	public function getItems() {
+        $query->from('`#__diarynames` AS a');
+	// Join over the created by field 'created_by'
+	$query->select('created_by.name AS created_by');
+	$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+        $query->order('a.date DESC, a.title ASC');
+
+        // Filter by search in title
+        $search = $this->getState('filter.search');
+        if (!empty($search)) {
+            if (stripos($search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr($search, 3));
+            } else {
+                $search = $db->Quote('%' . $db->escape($search, true) . '%');
+                $query->where('( a.title LIKE '.$search.'  OR  a.notes LIKE '.$search.'  OR  a.dog LIKE '.$search.' )');
+            }
+        }
+
+        
+
+		//Filtering date
+		$filter_date_from = $this->state->get("filter.date.from");
+		if ($filter_date_from) {
+			$query->where("a.date >= '".$filter_date_from."'");
+		}
+		$filter_date_to = $this->state->get("filter.date.to");
+		if ($filter_date_to) {
+			$query->where("a.date <= '".$filter_date_to."'");
+		}
+
+        return $query;
+    }
+
+    public function getItems() {
         return parent::getItems();
     }
 

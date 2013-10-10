@@ -2,54 +2,61 @@
 <form>
 	<fieldset>
 
-              <field name="id" type="hidden" default="0" label="COM_DIARY_FORM_LBL_DIARYITEM_ID"
+              <field name="id" type="hidden" default="0" label="COM_DIARY_FORM_LBL_DIARYNAME_ID"
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="owner" type="user"
             readonly="true" class="readonly"
-            label="COM_DIARY_FORM_LBL_DIARYITEM_OWNER"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER" 
-                
-                
-                 /> 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_OWNER"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_OWNER" /> 
 
-<field name="date" 
+<field name="dob" 
     type="calendar" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DATE"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DATE" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_DATE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_DATE" 
     format="%Y-%m-%d"
     required="true"
     default="now"
     filter="user_utc" />
     
+    <field name="pname" type="text"            
+            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            filter="safehtml"
+            size="20"
+            maxlength="25" />
     
-
-
-       <field name="title" type="text" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_TITLE"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_TITLE" 
+    <field name="rname" type="text"            
+            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
             filter="safehtml"
             size="20"
             maxlength="25" /> 
 
-       <field name="notes" type="textarea"
-                
-            label="COM_DIARY_FORM_LBL_DIARYITEM_NOTES"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_NOTES" 
+       <field name="rnumber" type="text"            
+            label="COM_DIARY_FORM_LBL_DIARYNAME_TITLE"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_TITLE" 
+            filter="safehtml"
+            size="20"
+            maxlength="25" /> 
+
+       <field name="notes" type="textarea"         
+            label="COM_DIARY_FORM_LBL_DIARYNAME_NOTES"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_NOTES" 
             cols="100"
             rows="8" /> 
 
        <field name="nameid" type="text"             
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_DOG"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_DOG" 
             filter="safehtml"
             size="25"
             maxlength="255" /> 
 
        <field name="created_by" type="createdby" default="" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
+            label="COM_DIARY_FORM_LBL_DIARYNAME_CREATED_BY"
+            description="COM_DIARY_FORM_DESC_DIARYNAME_CREATED_BY"  /> 
 
     <field
         name="state"
