@@ -74,7 +74,7 @@ class DiaryModelDiarynames extends JModelList {
 	// Join over the created by field 'created_by'
 	$query->select('created_by.name AS created_by');
 	$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-        $query->order('a.date DESC, a.title ASC');
+        $query->order('a.pname ASC, a.dob ASC');
 
         // Filter by search in title
         $search = $this->getState('filter.search');
