@@ -149,11 +149,9 @@ echo $nheading;
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
 			</div>
-				<div class="control-label"><?php echo $this->form->getLabel('owner'); ?></div>    
-				<?php if(!$this->item->id){
-				echo '<div class="controls"><input type="user" name="jform[owner]" value="'. $loginuser .'/></div>';
-				} ?>
-			</div>
+			<?php if(!$this->item->id){
+			    echo '<div class="controls"><input type="hidden" name="jform[owner]" value="'. $loginuser .'"/>';
+			} ?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('date'); ?></div> 
@@ -167,8 +165,8 @@ echo $nheading;
 				<div class="controls"><?php echo $this->form->getInput('notes'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('dog'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('dog'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('nameid'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('nameid'); ?></div>
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>

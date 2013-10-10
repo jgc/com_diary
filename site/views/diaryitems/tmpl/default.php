@@ -64,10 +64,14 @@ if ($loginuser == $owner){
 							}
 							if ((!empty($item->nameid)) and (!empty($item->owner)))
 							{
-							$display .= ' and ' . $item->owner;    
+							$user = JFactory::getUser($owner)
+							$username=$user->get('username');
+							$display .= ' and ' . $username;    
 							}
 							if ((empty($item->nameid)) and (!empty($item->owner)))
 							{
+							$user = JFactory::getUser($owner)
+							$username=$user->get('username');
 							$display .= ' with ' . $item->owner;    
 							}
 							$display .= '   ';

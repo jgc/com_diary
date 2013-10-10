@@ -40,13 +40,14 @@
             cols="100"
             rows="8" /> 
 
-       <field name="nameid" type="text"             
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
-            filter="safehtml"
-            size="25"
-            maxlength="255" /> 
-
+       <field name="nameid" type="sql"
+	      default="10"
+	      label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
+	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
+	      query="SELECT id, title FROM #__diarynames"
+	      key_field="id"
+	      value_field="pname" />
+       
        <field name="created_by" type="createdby" default="" 
             label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
             description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
