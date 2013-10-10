@@ -60,6 +60,7 @@ if ($loginuser == $owner){
 							if (!empty($item->nameid))
 							{
 							$display .= '   ';
+							}
 							?>
 							
 								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryname&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>

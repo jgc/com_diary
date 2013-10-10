@@ -62,11 +62,11 @@ if ($loginuser == $owner){
 							{
 							$display .= ' with ' . $item->nameid;    
 							}
-							if ((!empty($item->nameid) and (!empty($item->owner)))
+							if ((!empty($item->nameid)) and (!empty($item->owner)))
 							{
 							$display .= ' and ' . $item->owner;    
 							}
-							if ((empty($item->nameid) and (!empty($item->owner)))
+							if ((empty($item->nameid)) and (!empty($item->owner)))
 							{
 							$display .= ' with ' . $item->owner;    
 							}
