@@ -9,10 +9,7 @@
        <field name="owner" type="user"
                 
             label="COM_DIARY_FORM_LBL_DIARYITEM_OWNER"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER" 
-                
-                
-                 /> 
+            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER" /> 
 
        <field name="date" type="calendar"
                 

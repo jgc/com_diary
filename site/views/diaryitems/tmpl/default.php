@@ -51,9 +51,24 @@ if ($loginuser == $owner){
 						?>
 							<li>
 							<?php if(!$allowEdit): ?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $item->date . ' ' .$item->title . ':'; ?></a>
+							<?php
+							$display = $item->date . ' ';
+							if (!empty($item->title))
+							{
+							$display .= $item->title;    
+							}
+							if (!empty($item->nameid))
+							{
+							$display .= ' with ' . $item->nameid;    
+							}
+							if (!empty($item->owner))
+							{
+							$display .= ' and ' . $item->owner;    
+							}
+							?>
+								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
 							<?php else: ?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $item->date . ' ' .$item->title . ':'; ?></a>
+								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
 							<?php endif; ?>
 							<?php if($allowState): ?>
 										<a href="javascript:document.getElementById('form-diaryitem-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); endif; ?></a>
