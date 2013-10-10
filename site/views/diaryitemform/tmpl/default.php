@@ -153,6 +153,7 @@ echo $nheading;
 				<?php if(!$this->item->id){
 				echo '<div class="controls"><input type="user" name="jform[owner]" value="'. $loginuser .'/></div>';
 				} ?>
+			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('date'); ?></div> 

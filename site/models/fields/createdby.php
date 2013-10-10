@@ -44,7 +44,7 @@ class JFormFieldCreatedby extends JFormField
 			$user = JFactory::getUser();
 			$html[] = '<input type="hidden" name="'.$this->name.'" value="'.$user->id.'" />';
 		}
-		// $html[] = "<div>".$user->name." (".$user->username.")</div>";
+		$html[] = "<div>".$user->name." (".$user->username.")</div>";
         
 		return implode($html);
 	}
