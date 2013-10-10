@@ -44,7 +44,7 @@
 	      default="10"
 	      label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
 	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
-	      query="SELECT id, title FROM #__diarynames"
+	      query="SELECT id, pname FROM #__diarynames"
 	      key_field="id"
 	      value_field="pname" />
        

@@ -50,38 +50,78 @@ if ($loginuser == $owner){
 						$show = true;
 						?>
 						    <div>
-							<?php if(!$allowEdit): ?>
-							
 							<?php
-							$display = $item->date . ' ';
+							$display = '<br/>' . $item->date . '</a> <strong>';
+							
 							if (!empty($item->title))
 							{
 							$display .= $item->title;    
 							}
-							if (!empty($item->nameid))
+							
+							if (!empty($item->nameid)) 
 							{
-							$display .= ' with ' . $item->nameid;    
+							//echo $item->nameid . '<br/>';
+							$db = JFactory::getDbo();
+							$query = $db->getQuery(true);
+							$query->select('pname');
+							$query->from($db->quoteName('#__diarynames'));
+							$query->where($db->quoteName('id')." = ".$db->quote($item->nameid));
+							$db->setQuery($query);
+							$nameidname = $db->loadResult();
+							//echo $query . ' ' . $result . '<br/>';
 							}
-							if ((!empty($item->nameid)) and (!empty($item->owner)))
+							
+							if ((!empty($item->title)) && (!empty($item->nameid)))
 							{
-							$user = JFactory::getUser($owner)
-							$username=$user->get('username');
+							$display .= ' with ' . $nameidname; 
+							}
+							
+							if ((empty($item->title)) && (!empty($item->nameid)))
+							{
+							$display .= $nameidname; 
+							}
+							
+							if ((!empty($item->nameid)) && (!empty($item->owner)))
+							{
+							$user = JFactory::getUser($item->owner);
+							$username = $user->get('username');
 							$display .= ' and ' . $username;    
 							}
-							if ((empty($item->nameid)) and (!empty($item->owner)))
+							
+							if ((empty($item->nameid)) && (!empty($item->owner)))
 							{
-							$user = JFactory::getUser($owner)
-							$username=$user->get('username');
-							$display .= ' with ' . $item->owner;    
-							}
-							$display .= '   ';
+							$user = JFactory::getUser($item->owner);
+							$username = $user->get('username');
+							$display .= ' with ' . $username;    
+							}		
+							
+							$display .= '</strong>';
+							//$display .= '</a>';
+							
 							?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
-							<?php else: ?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
-							<?php endif; ?>
+							
+<?php if(!$allowEdit): ?>
+<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $display; ?>
+
+<?php else: ?>
+<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $display; ?>
+
+<?php endif; ?>
+							
+							<?php
+							if (!empty($item->notes))
+							{
+							echo '<br/>&nbsp;&nbsp;' . $item->notes . '';
+							}
+							?>
+							
 							<?php if($allowState): ?>
-										<a href="javascript:document.getElementById('form-diaryitem-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); endif; ?></a>
+
+<br/>&nbsp;&nbsp;<a href="javascript:document.getElementById('form-diaryitem-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); 
+
+else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); 
+
+endif; ?></a>
 										<form id="form-diaryitem-state-<?php echo $item->id ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo (int)!((int)$item->state); ?>" />
@@ -89,7 +129,7 @@ if ($loginuser == $owner){
 											<input type="hidden" name="jform[date]" value="<?php echo $item->date; ?>" />
 											<input type="hidden" name="jform[title]" value="<?php echo $item->title; ?>" />
 											<input type="hidden" name="jform[notes]" value="<?php echo $item->notes; ?>" />
-											<input type="hidden" name="jform[dog]" value="<?php echo $item->dog; ?>" />
+											<input type="hidden" name="jform[nameid]" value="<?php echo $item->nameid; ?>" />
 											<input type="hidden" name="option" value="com_diary" />
 											<input type="hidden" name="task" value="diaryitem.save" />
 											<?php echo JHtml::_('form.token'); ?>
@@ -98,7 +138,8 @@ if ($loginuser == $owner){
 									endif;
 									if($allowDelete):
 									?>
-										<a href="javascript:deleteItem(<?php echo $item->id; ?>);"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
+<a href="javascript:deleteItem(<?php echo $item->id; ?>);"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
+
 										<form id="form-diaryitem-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo $item->state; ?>" />
@@ -112,9 +153,7 @@ if ($loginuser == $owner){
 											<input type="hidden" name="task" value="diaryitem.remove" />
 											<?php echo JHtml::_('form.token'); ?>
 										</form>
-									<?php
-									endif;
-								?>
+									<?php endif; ?>
 							</div>
 						<?php endif; ?>
 
@@ -125,7 +164,7 @@ if ($loginuser == $owner){
         endif;
         ?>
 
-</div>
+</div><br/><br/>
 <?php if ($show): ?>
     <div class="pagination">
         <p class="counter">
