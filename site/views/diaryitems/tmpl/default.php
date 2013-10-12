@@ -9,6 +9,13 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
+<style>
+img.top {
+	vertical-align:top;
+}
+img.bottom {vertical-align:text-bottom;}
+</style>
+
 <script type="text/javascript">
     function deleteItem(item_id){
         if(confirm("<?php echo JText::_('COM_DIARY_DELETE_MESSAGE'); ?>")){
@@ -24,6 +31,7 @@ if ($pheading != ""){
 } else {
     echo '<h2 class="item-title">Diary entries</h2>';
 }
+                      
 ?>
 
 <div class="items">
@@ -106,6 +114,7 @@ if ($loginuser == $owner){
          $canvas_page = 'http://www.bloggundog.com';
          // $message = $this->item->title . ' on ' . $this->item->date; //DOES NOT WORK! 
          // Additional parameters
+         $flink = 'http://www.bloggundog.com/diary-entries/'.$item->id.'?view=diaryitem';
          $link = '&link=http://www.bloggundog.com/diary-entries/'.$item->id.'?view=diaryitem';
          //$picture = '&picture="http://upload.wikimedia.org/wikipedia/commons/f/fe/American_Brittany_standing.jpg"';
          //$name    = '&name="Brittany picture"';
@@ -113,7 +122,7 @@ if ($loginuser == $owner){
          //$description = "HPR line 1<center></center>line 2<center></center>line 3";
          
 	 $description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Click on link above to see detail';
-	 
+	 $fdescription = ' ' . $datest . ' ' . $item->title . ' on Gundog Diary. ' ;
          //$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . "&link=" . $link . "&picture=" . $picture . "&name=" . $name . "&caption=" . $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;
 
   	$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . $link . $picture . $name .  $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;
@@ -171,7 +180,7 @@ endif; ?></a>
 									?>
 <a href="javascript:deleteItem(<?php echo $item->id; ?>);"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
 
-										<form id="form-diaryitem-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
+<form id="form-diaryitem-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo $item->state; ?>" />
 											<input type="hidden" name="jform[owner]" value="<?php echo $item->owner; ?>" />
@@ -184,16 +193,17 @@ endif; ?></a>
 											<input type="hidden" name="task" value="diaryitem.remove" />
 											<?php echo JHtml::_('form.token'); ?>
 										</form>
-									
-										
-										
-										
-										
-										
+												
 									<?php endif; ?>
-<a href="<?php echo $feed_url; ?>" target="default">
-<img src="<?php echo JURI::root();?>images/diarysocial/facebook.png" width="15px" alt="Publish to Facebook"></a>
 
+<br/>
+<p>
+&nbsp;&nbsp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $flink; ?>" data-text="<?php echo $fdescription; ?>" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="<?php echo $feed_url; ?>" target="default">
+<img class="top" src="<?php echo JURI::root();?>images/diarysocial/facebook.png" width="18px" padding="5" alt="Publish to Facebook"></a>
+</p>
 <!--a class="btn" href="<?php echo $feed_url; ?>" target="default">Post to Facebook</a-->
 
 							</div>
