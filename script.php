@@ -65,10 +65,13 @@ class com_diaryInstallerScript
                 // $parent is the class calling this method
                 // $type is the type of change (install, update or discover_install)
                 // echo '<p>' . JText::_('COM_HELLOWORLD_POSTFLIGHT_' . $type . '_TEXT') . '</p>';
-                $imagepath = JURI::root().'images/diarysocial';
+                // $imagepath = JURI::root().'images/diarysocial';
+
+                $imagepath = JPATH_BASE . '/images/diarysocial';
+                echo $imagepath . '<br/>';
                 if (!file_exists($imagepath)) {
                     mkdir($imagepath, 0755, true);
-                    echo $imagepath . ' create <br/>';
+                    echo $imagepath . ' created <br/><br/>';
                 }
                 $filesource = JURI::root().'administrator/components/com_diary/assets/images/facebook.png';
                 $filedestination = JURI::root().'images/diarysocial/facebook.png';
