@@ -16,14 +16,6 @@ img.top {
 img.bottom {vertical-align:text-bottom;}
 </style>
 
-<script type="text/javascript">
-    function deleteItem(item_id){
-        if(confirm("<?php echo JText::_('COM_DIARY_DELETE_MESSAGE'); ?>")){
-            document.getElementById('form-diaryitem-delete-' + item_id).submit();
-        }
-    }
-</script>
-
 <?php 
 $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
 if ($pheading != ""){
@@ -54,6 +46,16 @@ if ($loginuser == $owner){
     $allowState = 0;
     $allowDelete = 0;
 }
+
+<?php if($allowDelete); ?>
+<script type="text/javascript">
+    function deleteItem(item_id){
+        if(confirm("<?php echo JText::_('COM_DIARY_DELETE_MESSAGE'); ?>")){
+            document.getElementById('form-diaryitem-delete-' + item_id).submit();
+        }
+    }
+</script>
+<?php endif; ?>
 					if($item->state == 1 || ($item->state == 0 && $allowEdit)):
 						$show = true;
 						?>
@@ -122,7 +124,7 @@ if ($loginuser == $owner){
          //$description = "HPR line 1<center></center>line 2<center></center>line 3";
          
 	 $description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Click on link above to see detail';
-	 $fdescription = ' ' . $datest . ' ' . $item->title . ' on Gundog Diary. ' ;
+	 $fdescription = '' . $datest . ' ' . $item->title . ' on Gundog Diary. ' ;
          //$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . "&link=" . $link . "&picture=" . $picture . "&name=" . $name . "&caption=" . $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;
 
   	$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . $link . $picture . $name .  $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;

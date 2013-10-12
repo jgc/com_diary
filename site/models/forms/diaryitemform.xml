@@ -33,20 +33,15 @@
             size="20"
             maxlength="25" /> 
 
-       <field name="notes" type="textarea"
-                
+       <field name="notes" type="textarea"     
             label="COM_DIARY_FORM_LBL_DIARYITEM_NOTES"
             description="COM_DIARY_FORM_DESC_DIARYITEM_NOTES" 
             cols="100"
             rows="8" /> 
 
-       <field name="nameid" type="sql"
-	      default="10"
+	<field name="nameid" type="namepname" default=""
 	      label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
-	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
-	      query="SELECT id, pname FROM #__diarynames"
-	      key_field="id"
-	      value_field="pname" />
+	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG"  />
        
        <field name="created_by" type="createdby" default="" 
             label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
