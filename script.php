@@ -67,14 +67,13 @@ class com_diaryInstallerScript
                 // echo '<p>' . JText::_('COM_HELLOWORLD_POSTFLIGHT_' . $type . '_TEXT') . '</p>';
                 // $imagepath = JURI::root().'images/diarysocial';
 
-                $imagepath = JPATH_BASE . '/images/diarysocial';
-                echo $imagepath . '<br/>';
+                $imagepath = JPATH_SITE . '/images/diarysocial';
                 if (!file_exists($imagepath)) {
                     mkdir($imagepath, 0755, true);
                     echo $imagepath . ' created <br/><br/>';
                 }
-                $filesource = JURI::root().'administrator/components/com_diary/assets/images/facebook.png';
-                $filedestination = JURI::root().'images/diarysocial/facebook.png';
+                $filesource = JPATH_SITE.'administrator/components/com_diary/assets/images/facebook.png';
+                $filedestination = JPATH_SITE.'images/diarysocial/facebook.png';
                 copy($filesource, $filedestination);
                 echo '<p>Postflight successful</p>';
         }
