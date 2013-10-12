@@ -15,7 +15,7 @@ class com_diaryInstallerScript
         function install($parent) 
         {
                 // $parent is the class calling this method
-                $parent->getParent()->setRedirectURL('index.php?option=com_helloworld');
+                // $parent->getParent()->setRedirectURL('index.php?option=com_helloworld');
         }
  
         /**
@@ -27,7 +27,7 @@ class com_diaryInstallerScript
         {
                 // $parent is the class calling this method
                 // echo '<p>' . JText::_('COM_HELLOWORLD_UNINSTALL_TEXT') . '</p>';
-                echo '<p>Uninstall successful</p>';
+                // echo '<p>Uninstall successful</p>';
         }
  
         /**
@@ -39,7 +39,7 @@ class com_diaryInstallerScript
         {
                 // $parent is the class calling this method
                 // echo '<p>' . JText::sprintf('COM_HELLOWORLD_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
-                echo '<p>Update successful</p>';
+                // echo '<p>Update successful</p>';
         }
  
         /**
@@ -52,7 +52,7 @@ class com_diaryInstallerScript
                 // $parent is the class calling this method
                 // $type is the type of change (install, update or discover_install)
                 // echo '<p>' . JText::_('COM_HELLOWORLD_PREFLIGHT_' . $type . '_TEXT') . '</p>';
-                echo '<p>Preflight successful</p>';
+                // echo '<p>Preflight successful</p>';
         }
  
         /**
@@ -70,11 +70,11 @@ class com_diaryInstallerScript
                 $imagepath = JPATH_SITE . '/images/diarysocial';
                 if (!file_exists($imagepath)) {
                     mkdir($imagepath, 0755, true);
-                    echo $imagepath . ' created <br/><br/>';
+                    echo 'Directory: ' . $imagepath . ' created <br/><br/>';
                 }
-                $filesource = JPATH_SITE.'administrator/components/com_diary/assets/images/facebook.png';
-                $filedestination = JPATH_SITE.'images/diarysocial/facebook.png';
+                $filesource = JPATH_SITE.'/administrator/components/com_diary/assets/images/facebook.png';
+                $filedestination = JPATH_SITE.'/images/diarysocial/facebook.png';
                 copy($filesource, $filedestination);
-                echo '<p>Postflight successful</p>';
+                echo '<p>Images copied.</p>';
         }
 }
