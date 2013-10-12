@@ -68,6 +68,7 @@ class com_diaryInstallerScript
                 $imagepath = JURI::root().'images/diarysocial';
                 if (!file_exists($imagepath)) {
                     mkdir($imagepath, 0755, true);
+                    echo $imagepath . ' create <br/>';
                 }
                 $filesource = JURI::root().'administrator/components/com_diary/assets/images/facebook.png';
                 $filedestination = JURI::root().'images/diarysocial/facebook.png';
