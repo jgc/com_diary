@@ -47,15 +47,6 @@ if ($loginuser == $owner){
     $allowDelete = 0;
 }
 
-<?php if($allowDelete); ?>
-<script type="text/javascript">
-    function deleteItem(item_id){
-        if(confirm("<?php echo JText::_('COM_DIARY_DELETE_MESSAGE'); ?>")){
-            document.getElementById('form-diaryitem-delete-' + item_id).submit();
-        }
-    }
-</script>
-<?php endif; ?>
 					if($item->state == 1 || ($item->state == 0 && $allowEdit)):
 						$show = true;
 						?>
@@ -178,8 +169,15 @@ endif; ?></a>
 										</form>
 																			<?php
 									endif;
-									if($allowDelete):
-									?>
+									if($allowDelete):?>
+									
+									<script type="text/javascript">
+    function deleteItem(item_id){
+        if(confirm("<?php echo JText::_('COM_DIARY_DELETE_MESSAGE'); ?>")){
+            document.getElementById('form-diaryitem-delete-' + item_id).submit();
+        }
+    }
+</script>
 <a href="javascript:deleteItem(<?php echo $item->id; ?>);"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
 
 <form id="form-diaryitem-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
