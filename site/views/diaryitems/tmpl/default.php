@@ -51,7 +51,10 @@ if ($loginuser == $owner){
 						?>
 						    <div>
 							<?php
-							$display = '<br/>' . $item->date . '</a> <strong>';
+							$date = date_create_from_format('Y-m-j', $item->date);
+							$datest = date_format($date, 'd M Y');
+							$datesth = date_format($date, 'F d');
+							$display = '<br/>' . $datesth . '</a> <strong>';
 							
 							if (!empty($item->title))
 							{
@@ -101,14 +104,15 @@ if ($loginuser == $owner){
          $app_id = "340031409395063";
          // $canvas_page = "http://bloggundog.com/fb.php";
          $canvas_page = 'http://www.bloggundog.com';
-         // DOES NOT WORK! $message = $this->item->title . ' on ' . $this->item->date;
+         // $message = $this->item->title . ' on ' . $this->item->date; //DOES NOT WORK! 
          // Additional parameters
          $link = '&link=http://www.bloggundog.com/diary-entries/'.$item->id.'?view=diaryitem';
          //$picture = '&picture="http://upload.wikimedia.org/wikipedia/commons/f/fe/American_Brittany_standing.jpg"';
          //$name    = '&name="Brittany picture"';
          //$caption = '&caption="Training on " . $this->item->date';
          //$description = "HPR line 1<center></center>line 2<center></center>line 3";
-	 $description = $item->date . ' ' . $item->title ;
+         
+	 $description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Click on link above to see detail';
 	 
          //$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . "&link=" . $link . "&picture=" . $picture . "&name=" . $name . "&caption=" . $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;
 
@@ -187,9 +191,11 @@ endif; ?></a>
 										
 										
 									<?php endif; ?>
-									<br/>
+<a href="<?php echo $feed_url; ?>" target="default">
+<img src="<?php echo JURI::root();?>images/diarysocial/facebook.png" width="15px" alt="Publish to Facebook"></a>
 
-<a class="btn" href="<?php echo $feed_url; ?>" target="default">Post to Facebook</a>
+<!--a class="btn" href="<?php echo $feed_url; ?>" target="default">Post to Facebook</a-->
+
 							</div>
 						<?php endif; ?>
 
