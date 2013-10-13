@@ -75,6 +75,9 @@ class com_diaryInstallerScript
                 $filesource = JPATH_SITE.'/administrator/components/com_diary/assets/images/facebook.png';
                 $filedestination = JPATH_SITE.'/images/diarysocial/facebook.png';
                 copy($filesource, $filedestination);
+                $filesource = JPATH_SITE.'/administrator/components/com_diary/assets/images/bird_blue_16.png';
+                $filedestination = JPATH_SITE.'/images/diarysocial/bird_blue_16.png';
+                copy($filesource, $filedestination);
                 echo '<p>Images copied.</p>';
         }
 }
