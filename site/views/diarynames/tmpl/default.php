@@ -36,7 +36,7 @@ if ($pheading != ""){
 $user = JFactory::getUser();
 $loginuser = $user->id;
 $owner = $item->owner;
-// echo $loginuser.'-'.$owner;
+//echo $loginuser.'-'.$owner;
 if ($loginuser == $owner){
     $allowEdit = 1;
     $allowState = 1;
@@ -50,27 +50,47 @@ if ($loginuser == $owner){
 						$show = true;
 						?>
 						    <div>
-							<?php if(!$allowEdit): ?>
 							<?php
 							$display = $item->date . ' ';
+							
 							if (!empty($item->pname))
 							{
 							$display .= $item->pname;    
 							}
-							if (!empty($item->nameid))
+							
+							if (!empty($item->rname))
 							{
-							$display .= '   ';
+							$display .= '. Registered as ' . $item->rname. ' ';
 							}
 							?>
 							
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryname&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
-							<?php else: ?>
-								<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diarynameform&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
-							<?php endif; ?>
+<?php if(!$allowEdit): ?>
+<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryname&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
 
-							<?php if($allowState): ?>
-										<a href="javascript:document.getElementById('form-diaryname-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); endif; ?></a>
-										<form id="form-diaryname-state-<?php echo $item->id ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
+<?php else: ?>
+<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diarynameform&id=' . (int)$item->id); ?>"><?php echo $display; ?></a>
+
+<?php endif; ?>
+
+<?php
+if (!empty($item->notes))
+{
+	echo '<br/>&nbsp;&nbsp;' . $item->notes . '';
+}
+?>
+							
+<?php if($allowState): ?>
+
+<br/>&nbsp;&nbsp;<a href="javascript:document.getElementById('form-diaryname-state-<?php echo $item->id; ?>').submit()">
+
+
+<?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); 
+
+else: echo JText::_("COM_DIARY_PUBLISH_ITEM"); 
+
+endif; ?></a>
+										
+<form id="form-diaryname-state-<?php echo $item->id ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo (int)!((int)$item->state); ?>" />
 											<input type="hidden" name="jform[owner]" value="<?php echo $item->owner; ?>" />
@@ -83,13 +103,16 @@ if ($loginuser == $owner){
 											<input type="hidden" name="option" value="com_diary" />
 											<input type="hidden" name="task" value="diaryname.save" />
 											<?php echo JHtml::_('form.token'); ?>
-										</form>
-									<?php
-									endif;
-									if($allowDelete):
-									?>
-										<a href="javascript:deleteItem(<?php echo $item->id; ?>);"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
-										<form id="form-diaryname-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
+</form>
+<?php endif;?>
+
+<?php if($allowDelete):?>
+
+
+<a href="javascript:deleteItem(<?php echo $item->id; ?>);">
+<?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
+
+<form id="form-diaryname-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo $item->state; ?>" />
 											<input type="hidden" name="jform[owner]" value="<?php echo $item->owner; ?>" />
@@ -102,16 +125,15 @@ if ($loginuser == $owner){
 											<input type="hidden" name="option" value="com_diary" />
 											<input type="hidden" name="task" value="diaryname.remove" />
 											<?php echo JHtml::_('form.token'); ?>
-										</form>
-									<?php
-									endif;
-								?>
-							</div>
-						<?php endif; ?>
+</form>
+<?php endif; ?>
+<br/>
+</div>
 
+<?php endif; ?>
 <?php endforeach; ?>
-        <?php
-        if (!$show):
+
+<?php if (!$show):
             echo JText::_('COM_DIARY_NO_ITEMS');
         endif;
         ?>

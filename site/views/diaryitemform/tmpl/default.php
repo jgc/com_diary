@@ -156,6 +156,12 @@ echo $nheading;
 				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('date'); ?></div> 
 			</div>
+			
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('nameid'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('nameid'); ?>&nbsp;<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diarynameform'); ?>">Add new dog</a></div>
+			</div>
+
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
@@ -163,11 +169,6 @@ echo $nheading;
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('notes'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('notes'); ?></div>
-			</div>
-
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('nameid'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('nameid'); ?></div>
 			</div>
 
 			<div class="control-group">

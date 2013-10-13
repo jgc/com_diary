@@ -37,10 +37,16 @@ class JFormFieldNamepname extends JFormField
 	 */
 	protected function getInput()
         {
-		$loginuser = 897;
+		//$loginuser = 897;
+		$user =& JFactory::getUser();
+ 		if ($user->id == 0) {
+		} else {
+			$loginusername = $user->name;
+			$loginuserid = $user->id;
+		}
 		$wh = 'state = 1 and owner = '.$loginuser;
 		$db =& JFactory::getDbo();
-		$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1' and owner = '".$loginuser."') order by pname ASC";
+		$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1' and owner = '".$loginuserid."') order by pname ASC";
 		//$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1') order by pname ASC";
 		$db->setQuery($query);
 		
