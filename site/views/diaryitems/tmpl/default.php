@@ -233,8 +233,9 @@ if($allowDelete):?>
         </p>
         <?php echo $this->pagination->getPagesLinks(); ?>
     </div>
+    
 <?php endif; ?>
-
+<br/>
 <?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
 	
 <?php endif; ?>
