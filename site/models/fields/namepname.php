@@ -37,7 +37,12 @@ class JFormFieldNamepname extends JFormField
 	 */
 	protected function getInput()
         {
-		//$loginuser = 897;
+
+		$html = array();
+       
+		//Load name
+		$nameid = $this->value;
+		
 		$user =& JFactory::getUser();
  		if ($user->id == 0) {
 		} else {
@@ -47,31 +52,25 @@ class JFormFieldNamepname extends JFormField
 		$wh = 'state = 1 and owner = '.$loginuser;
 		$db =& JFactory::getDbo();
 		$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1' and owner = '".$loginuserid."') order by pname ASC";
-		//$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1') order by pname ASC";
 		$db->setQuery($query);
-		
-		//$db = JFactory::getDBO();
-		//$query = $db->getQuery(true);
-		//$query->select('id, pname');
-		//$query->from('#__diarynames');
-		//$query->where('owner = 879');
-		//$db->setQuery((string)$query);
-		//$db->setQuery($query);
-		
 		$sample = $db->loadObjectList();
 		$options = array();
 		if ($sample)
 		{
-		$html[] = '<select>';
+
+		$html[] = '<select id="jform_nameid" name="jform[nameid]" class="inputbox" size="1">';
 		foreach($sample as $item)
 		{
-			$html[] .= '<option value="'.$item->id.'">'.$item->pname.'</option>';
+			if ($item->id == $nameid){
+				$html[] .= '<option value="'.$item->id.'" selected >'.$item->pname.'</option>';
+			} else {
+				$html[] .= '<option value="'.$item->id.'">'.$item->pname.'</option>';
+			}
 		}
 		$html[] .= '</select>';
 		}
 
-        	return implode($html);
+        return implode($html);
 
-	}
-	
+	}	
 }
