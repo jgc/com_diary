@@ -17,7 +17,11 @@ defined('_JEXEC') or die;
     }
 </script>
 
-<?php 
+<?php
+
+$displayDelete = 0;
+$displayPublish = 0;
+
 $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
 if ($pheading != ""){
     echo '<h2 class="item-title">'.$pheading.'</h2>';
@@ -79,8 +83,7 @@ if (!empty($item->notes))
 }
 ?>
 							
-<?php if($allowState): ?>
-
+<?php if($allowState && $displayPublish): ?>
 <br/>&nbsp;&nbsp;<a href="javascript:document.getElementById('form-diaryname-state-<?php echo $item->id; ?>').submit()">
 
 
@@ -106,7 +109,7 @@ endif; ?></a>
 </form>
 <?php endif;?>
 
-<?php if($allowDelete):?>
+<?php if($allowDelete && $displayDelete):?>
 
 
 <a href="javascript:deleteItem(<?php echo $item->id; ?>);">
@@ -127,7 +130,7 @@ endif; ?></a>
 											<?php echo JHtml::_('form.token'); ?>
 </form>
 <?php endif; ?>
-<br/>
+<br/><br/>
 </div>
 
 <?php endif; ?>

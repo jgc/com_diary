@@ -48,16 +48,22 @@
             description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
 
     <field
-        name="state"
+        name="view"
         type="list"
-        label="JSTATUS"
-        description="JFIELD_PUBLISHED_DESC"
+        label="View status"
+        description="View status"
         class="inputbox"
         size="1"
         default="1">
         <option value="1">JPUBLISHED</option>
         <option value="0">JUNPUBLISHED</option>
-    </field> 
+    </field>
+    
+<field name="viewstatus" type="hidden" default="1"
+        label="View status"
+        readonly="true"
+        class="readonly"
+        description="View statua" /> 
 
  </fieldset> 
 

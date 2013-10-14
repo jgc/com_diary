@@ -69,10 +69,16 @@ class DiaryModelDiarynames extends JModelList {
                         'list.select', 'a.*'
                 )
         );
-
+        $loginuserid = "";
+        $user =& JFactory::getUser();
+ 	if ($user->id == 0) {
+	} else {
+		$loginuserid = $user->id;
+	}
         $query->from('`#__diarynames` AS a');
 	// Join over the created by field 'created_by'
 	$query->select('created_by.name AS created_by');
+	$query->where('a.owner = '.$loginuserid);
 	$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
         $query->order('a.pname ASC, a.dob ASC');
 
