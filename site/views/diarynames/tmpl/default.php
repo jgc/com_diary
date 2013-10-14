@@ -140,7 +140,7 @@ endif; ?></a>
 <?php endif; ?>
 
 <?php endforeach; ?>
-<br/>
+
 <?php if (!$show):
             echo JText::_('COM_DIARY_NO_NAMES');
         endif;

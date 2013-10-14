@@ -217,7 +217,7 @@ if($allowDelete):?>
 <?php endif; ?>
 
 <?php endforeach; ?>
-<br/><br/>
+<br/>
 
 <?php
         if (!$show):
