@@ -1,4 +1,4 @@
-php
+<?php
 /**
  * @version     1.0.0
  * @package     com_diary
@@ -104,7 +104,7 @@ $loginuser = $user->id;
 $owner = $this->item->owner;
 //echo $loginuser.'-'.$owner;
 //if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
-if ($loginuser == $owner)  {
+if (($loginuser == $owner) or (($user->authorise('core.create', 'com_diary')) && (empty($this->item->id))))  {
     $allowEdit = 1;
     $allowState = 1;
     $allowDelete = 1;
@@ -134,7 +134,9 @@ if ((!empty($pheading)) and (!empty($this->item->id))) {
 $nheading = '<h2 class="item-title">Edit '.$pheading.'</h2>';}
 
 echo $nheading;
+
 ?>
+<br/>
 
 <?php if($allowEdit): ?>
 
@@ -185,6 +187,7 @@ echo $nheading;
 		</ul>
 
         <div>
+        <br/>
             <button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
             <?php echo JText::_('or'); ?>
             <a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>

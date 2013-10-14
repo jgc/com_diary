@@ -103,7 +103,7 @@ $user = JFactory::getUser();
 $loginuser = $user->id;
 $owner = $this->item->owner;
 //echo $loginuser.'-'.$owner;
-if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
+if (($loginuser == $owner) or (($user->authorise('core.create', 'com_diary')) && (empty($this->item->id))))  {
     $allowEdit = 1;
     $allowState = 1;
     $allowDelete = 1;
@@ -134,7 +134,7 @@ $nheading = '<h2 class="item-title">Edit '.$pheading.'</h2>';}
 
 echo $nheading;
 ?>
-
+<br/>
 <?php if($allowEdit): ?>
 
 <div class="diaryitem-edit front-end-edit"> 
@@ -182,6 +182,7 @@ echo $nheading;
 		</ul>
 
         <div>
+        <br/>
             <button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
             <?php echo JText::_('or'); ?>
             <a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
