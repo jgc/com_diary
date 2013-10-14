@@ -134,12 +134,13 @@ endif; ?></a>
 <?php endif; ?>
 <br/><br/>
 </div>
+<br/>
 
 <?php endif; ?>
 <?php endforeach; ?>
 
 <?php if (!$show):
-            echo JText::_('COM_DIARY_NO_ITEMS');
+            echo JText::_('COM_DIARY_NO_NAMES');
         endif;
         ?>
     </ul>
