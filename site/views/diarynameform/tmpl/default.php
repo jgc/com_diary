@@ -1,4 +1,4 @@
-<?php
+php
 /**
  * @version     1.0.0
  * @package     com_diary
@@ -103,7 +103,8 @@ $user = JFactory::getUser();
 $loginuser = $user->id;
 $owner = $this->item->owner;
 //echo $loginuser.'-'.$owner;
-if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
+//if (($loginuser == $owner) or ($user->authorise('core.create', 'com_diary')))  {
+if ($loginuser == $owner)  {
     $allowEdit = 1;
     $allowState = 1;
     $allowDelete = 1;
@@ -194,6 +195,7 @@ echo $nheading;
         </div>
     </form>
     <?php else: ?>
+    
     <div class="diaryname-edit front-end-edit">
     <?php
             $error = JText::_('COM_DIARY_ITEM_NOT_LOADED');
