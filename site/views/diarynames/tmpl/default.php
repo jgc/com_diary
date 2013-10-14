@@ -84,9 +84,10 @@ if (!empty($item->notes))
 	echo '<br/>&nbsp;&nbsp;' . $item->notes . '';
 }
 ?>
-							
+<br/>							
 <?php if($allowState && $displayPublish): ?>
-<br/>&nbsp;&nbsp;<a href="javascript:document.getElementById('form-diaryname-state-<?php echo $item->id; ?>').submit()">
+<br/>
+&nbsp;&nbsp;<a href="javascript:document.getElementById('form-diaryname-state-<?php echo $item->id; ?>').submit()">
 
 
 <?php if($item->state == 1): echo JText::_("COM_DIARY_UNPUBLISH_ITEM"); 
@@ -144,8 +145,7 @@ endif; ?></a>
             echo JText::_('COM_DIARY_NO_NAMES');
         endif;
         ?>
-    </ul>
-    
+
 </div>
 <br/><br/>
 
