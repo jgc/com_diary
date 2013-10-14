@@ -217,7 +217,9 @@ if($allowDelete):?>
 <?php endif; ?>
 
 <?php endforeach; ?>
-        <?php
+<br/><br/>
+
+<?php
         if (!$show):
             echo JText::_('COM_DIARY_NO_ITEMS');
         endif;
