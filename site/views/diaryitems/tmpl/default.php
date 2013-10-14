@@ -212,6 +212,7 @@ if($allowDelete):?>
 <img src="<?php echo JURI::root();?>images/diarysocial/facebook.png" width="16px" padding="5" alt="Publish to Facebook"></a>
 
 </div>
+<br/>
 
 <?php endif; ?>
 
@@ -222,7 +223,9 @@ if($allowDelete):?>
         endif;
         ?>
 
-</div><br/><br/>
+</div>
+<br/><br/>
+
 <?php if ($show): ?>
     <div class="pagination">
         <p class="counter">
@@ -232,7 +235,6 @@ if($allowDelete):?>
     </div>
 <?php endif; ?>
 
-
-									<?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
+<?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
 	
 <?php endif; ?>

@@ -137,6 +137,7 @@ endif; ?></a>
 <br/>
 
 <?php endif; ?>
+
 <?php endforeach; ?>
 
 <?php if (!$show):
@@ -144,7 +145,9 @@ endif; ?></a>
         endif;
         ?>
     </ul>
+    
 </div>
+<br/><br/>
 
 <?php if ($show): ?>
     <div class="pagination">
@@ -155,7 +158,7 @@ endif; ?></a>
     </div>
 
 <?php endif; ?>
-
+<br/>
 <?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
 
 <?php endif; ?>
