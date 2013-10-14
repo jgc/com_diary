@@ -40,7 +40,8 @@ $allowView = 0;
 if ($published == 1){
 $allowView = 1;
 } else {
-$allowView = 0;
+//FIX
+$allowView = 1;
 }
 //echo $allowView;
 //echo $loginuser.'-'.$owner;
@@ -134,7 +135,7 @@ if ($loginuser == $owner){
 // picture=http://upload.wikimedia.org/wikipedia/commonsf/fe/American_Brittany_standing.jpg&name=new blog&
 // caption=news and views&description=about gundogs&redirect_uri=http://bloggundog.com
 ?>
-<a class="btn" href="<?php echo $feed_url; ?>" target="default">Post to Facebook</a>							
+<!--a class="btn" href="<?php echo $feed_url; ?>" target="default">Post to Facebook</a-->							
 							
 <?php
 else:

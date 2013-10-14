@@ -29,6 +29,7 @@ if ($pheading != ""){
     echo '<h2 class="item-title">Diary entries</h2>';
 }
 ?>
+<br/>
 
 <div class="items">
 
@@ -143,6 +144,8 @@ endif; ?></a>
         ?>
     </ul>
 </div>
+<br/>
+
 <?php if ($show): ?>
     <div class="pagination">
         <p class="counter">
@@ -150,8 +153,9 @@ endif; ?></a>
         </p>
         <?php echo $this->pagination->getPagesLinks(); ?>
     </div>
+
 <?php endif; ?>
 
+<?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
 
-									<?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
-	<?php endif; ?>
+<?php endif; ?>
