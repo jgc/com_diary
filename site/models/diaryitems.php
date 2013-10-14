@@ -63,14 +63,13 @@ class DiaryModelDiaryitems extends JModelList {
         $db = $this->getDbo();
         $query = $db->getQuery(true);
 
-        Select the required fields from the table.
-        //$query->select(
-        //        $this->getState(
-        //                'list.select', 'a.*'
-        //        )
-        //);
+        //Select the required fields from the table.
+        $query->select(
+                $this->getState(
+                        'list.select', 'a.*'
+                )
+        );
 
-	$query->select('a.*');
         $query->from('`#__diaryitems` AS a');
 	// Join over the created by field 'created_by'
 	$query->select('created_by.name AS created_by');
