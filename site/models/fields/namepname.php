@@ -51,7 +51,8 @@ class JFormFieldNamepname extends JFormField
 		}
 		$wh = 'state = 1 and owner = '.$loginuser;
 		$db =& JFactory::getDbo();
-		$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1' and owner = '".$loginuserid."') order by pname ASC";
+		//$query = "SELECT id, pname FROM #__diarynames WHERE (state = '1' and owner = '".$loginuserid."') order by pname ASC";
+		$query = "SELECT id, pname FROM #__diarynames WHERE (owner = '".$loginuserid."') order by pname ASC";
 		$db->setQuery($query);
 		$sample = $db->loadObjectList();
 		$options = array();

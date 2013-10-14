@@ -64,8 +64,9 @@ if ($loginuser == $owner){
 							
 							if (!empty($item->rname))
 							{
-							$display .= '. Registered as ' . $item->rname. ' ';
+							$display .= ' (registered as ' . $item->rname. ')';
 							}
+							
 							?>
 							
 <?php if(!$allowEdit): ?>

@@ -27,6 +27,8 @@ if ($pheading != ""){
 <?php foreach ($this->items as $item) : ?>        
 
 <?php
+$viewState = 1;
+$displayPublish = 0;
 $user = JFactory::getUser();
 $loginuser = $user->id;
 $owner = $item->owner;
@@ -40,7 +42,7 @@ if ($loginuser == $owner){
     $allowState = 0;
     $allowDelete = 0;
 }
-					if($item->state == 1 || ($item->state == 0 && $allowEdit)):
+					if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
 						$show = true;
 						?>
 						    <div>
@@ -143,8 +145,8 @@ if (!empty($item->notes))
 echo '<br/>&nbsp;&nbsp;' . $item->notes . '';
 }
 ?>
-
-<?php if($allowState): ?>
+<br/>
+<?php if(($allowState) & ($displayPublish == 1)): ?>
 <br/>
 &nbsp;&nbsp;
 <?php if($item->state == 1): ?>
@@ -232,4 +234,5 @@ if($allowDelete):?>
 
 
 									<?php if(JFactory::getUser()->authorise('core.create','com_diary')): ?><a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id=0'); ?>"><?php echo JText::_("COM_DIARY_ADD_ITEM"); ?></a>
-	<?php endif; ?>
+	
+<?php endif; ?>
