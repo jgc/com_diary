@@ -170,9 +170,37 @@ echo $nheading;
 				<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 			</div>
+
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('notes'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('notes'); ?></div>
+			</div>
+
+
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('youtube1'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('youtube1'); ?></div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('youtube2'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('youtube2'); ?></div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('photo1'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('photo1'); ?></div>
+			</div>
+
+
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('photo2'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('photo2'); ?></div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('photo3'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('photo3'); ?></div>
 			</div>
 
 			<div class="control-group">

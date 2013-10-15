@@ -72,6 +72,11 @@ class com_diaryInstallerScript
                     mkdir($imagepath, 0755, true);
                     echo 'Directory: ' . $imagepath . ' created <br/><br/>';
                 }
+                $imagepath = JPATH_SITE . '/images/diaryitems';
+                if (!file_exists($imagepath)) {
+                    mkdir($imagepath, 0755, true);
+                    echo 'Directory: ' . $imagepath . ' created <br/><br/>';
+                }
                 $filesource = JPATH_SITE.'/administrator/components/com_diary/assets/images/facebook.png';
                 $filedestination = JPATH_SITE.'/images/diarysocial/facebook.png';
                 copy($filesource, $filedestination);

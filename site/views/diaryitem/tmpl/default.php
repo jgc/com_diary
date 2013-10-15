@@ -77,7 +77,21 @@ if ($loginuser == $owner){
 			<?php echo $this->item->title; ?></div><br/>
 			
 			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_NOTES') . '</strong>'; ?><br/>
-			<?php echo $this->item->notes; ?></div>
+			<?php echo $this->item->notes; ?></div><br/>
+			
+			<div><?php echo '<strong>Youtube video/s</strong>'; ?><br/>
+			<div align="left"><iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div><br/>
+			
+			<div><?php echo '<strong>Photo/s</strong>'; ?><br/>
+			<div align="left"><iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->photo1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->photo2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div><br/>
+			<p>
+			<img src="images/diarysocial/<?php echo $this->item->photo1; ?>" alt="" style="float:left" width="40%">
+			<img src="images/diarysocial/<?php echo $this->item->photo2; ?>" alt="" style="float:rigth" width="40%">
+			<img src="images/diarysocial/<?php echo $this->item->photo1; ?>" alt="" style="float:left" width="40%">
+			</p>
+			
 			
    </div>
    
@@ -87,22 +101,30 @@ if ($loginuser == $owner){
 								<?php if($allowDeleteX): //FIX - remove all together
 								?>
 									<a href="javascript:document.getElementById('form-diaryitem-delete-<?php echo $this->item->id ?>').submit()"><?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
-									<form id="form-diaryitem-delete-<?php echo $this->item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
-										<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
-										<input type="hidden" name="jform[state]" value="<?php echo $this->item->state; ?>" />
-										<input type="hidden" name="jform[owner]" value="<?php echo $this->item->owner; ?>" />
-										<input type="hidden" name="jform[date]" value="<?php echo $this->item->date; ?>" />
-										<input type="hidden" name="jform[title]" value="<?php echo $this->item->title; ?>" />
-										<input type="hidden" name="jform[notes]" value="<?php echo $this->item->notes; ?>" />
-										<input type="hidden" name="jform[dog]" value="<?php echo $this->item->dog; ?>" />
-										<input type="hidden" name="jform[created_by]" value="<?php echo $this->item->created_by; ?>" />
-										<input type="hidden" name="option" value="com_diary" />
-										<input type="hidden" name="task" value="diaryitem.remove" />
-										<?php echo JHtml::_('form.token'); ?>
-									</form>
-								<?php
-								endif;
-							?>
+
+<form id="form-diaryitem-delete-<?php echo $this->item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
+
+<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
+<input type="hidden" name="jform[state]" value="<?php echo $this->item->state; ?>" />
+<input type="hidden" name="jform[owner]" value="<?php echo $this->item->owner; ?>" />
+<input type="hidden" name="jform[date]" value="<?php echo $this->item->date; ?>" />
+<input type="hidden" name="jform[title]" value="<?php echo $this->item->title; ?>" />
+<input type="hidden" name="jform[notes]" value="<?php echo $this->item->notes; ?>" />
+
+<input type="hidden" name="jform[youtube1]" value="<?php echo $this->item->youtube1; ?>" />
+<input type="hidden" name="jform[youtube2]" value="<?php echo $this->item->youtube2; ?>" />
+<input type="hidden" name="jform[photo1]" value="<?php echo $this->item->photo1; ?>" />
+<input type="hidden" name="jform[photo2]" value="<?php echo $this->item->photo2; ?>" />
+<input type="hidden" name="jform[photo3]" value="<?php echo $this->item->photo3; ?>" />
+
+<input type="hidden" name="jform[dog]" value="<?php echo $this->item->dog; ?>" />
+<input type="hidden" name="jform[created_by]" value="<?php echo $this->item->created_by; ?>" />
+<input type="hidden" name="option" value="com_diary" />
+<input type="hidden" name="task" value="diaryitem.remove" />
+<?php echo JHtml::_('form.token'); ?>
+</form>
+
+<?php endif; ?>
 <br/>
 <?php 
 
@@ -145,3 +167,4 @@ else:
 
 endif;
 ?>
+

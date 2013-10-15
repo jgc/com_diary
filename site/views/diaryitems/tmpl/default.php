@@ -88,7 +88,8 @@ if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
 							if ((!empty($item->nameid)) && (!empty($item->owner)))
 							{
 							$user = JFactory::getUser($item->owner);
-							$username = $user->get('username');
+							//$username = $user->get('username');
+							$username = $user->get('name');
 							$display .= ' by ' . $username;    
 							}
 							

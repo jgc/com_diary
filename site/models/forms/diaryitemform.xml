@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<form>
-	<fieldset>
+<form
+	addrulepath="/components/com_diary/models/rules" >
+	
+<fieldset>
 
-              <field name="id" type="hidden" default="0" label="COM_DIARY_FORM_LBL_DIARYITEM_ID"
+<field name="id" type="hidden" default="0" label="COM_DIARY_FORM_LBL_DIARYITEM_ID"
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
-       <field name="owner" type="user"
+<field name="owner" type="user"
             readonly="true" class="readonly"
             label="COM_DIARY_FORM_LBL_DIARYITEM_OWNER"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER" 
-                
-                
-                 /> 
+            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER"  /> 
 
 <field name="date" 
     type="calendar" 
@@ -22,26 +21,50 @@
     required="true"
     default="now"
     filter="user_utc" />
-    
-    
 
-
-       <field name="title" type="text" 
+<field name="title" type="text" 
             label="COM_DIARY_FORM_LBL_DIARYITEM_TITLE"
             description="COM_DIARY_FORM_DESC_DIARYITEM_TITLE" 
             filter="safehtml"
             size="20"
             maxlength="25" /> 
 
-       <field name="notes" type="textarea"     
+<field name="notes" type="textarea"     
             label="COM_DIARY_FORM_LBL_DIARYITEM_NOTES"
             description="COM_DIARY_FORM_DESC_DIARYITEM_NOTES" 
             cols="100"
             rows="8" /> 
 
-	<field name="nameid" type="namepname" default=""
+<field name="nameid" type="namepname" default=""
 	      label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
 	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG"  />
+	      
+<field name="youtube1" type="youtubedisplay" 
+            label="Youtube video 1"
+            description="Add the link to a Youtube video"  /> 
+
+<field name="youtube2" type="youtubedisplay" 
+        label="Youtube video 2"
+	description="Add the link to a Youtube video"  /> 
+                        
+<field name="photo1" type="file" 
+       label="Add photo 1" 
+       description="Choose an image from your computer with maximum 100KB" 
+       size="10"
+       accept="image/*" />
+
+       <field name="photo2" type="file" 
+       label="Add photo 2" 
+       description="Choose an image from your computer with maximum 100KB" 
+       size="10" 
+       accept="image/*" />
+       
+       <field name="photo3" type="file" 
+       label="Add photo 3" 
+       description="Choose an image from your computer with maximum 100KB" 
+       size="10" 
+       accept="image/*" />       
+    
        
        <field name="created_by" type="createdby" default="" 
             label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
