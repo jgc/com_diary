@@ -11,6 +11,10 @@ defined('_JEXEC') or die;
 ?>
 
 <?php 
+$readmore = "<strong>Read more ...</strong>&nbsp;";
+$readmoreEdit = "<strong>Edit / Read more ...</strong>&nbsp;";
+
+
 $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
 if ($pheading != ""){
     echo '<h2 class="item-title">'.$pheading.'</h2>';
@@ -42,7 +46,8 @@ if ($loginuser == $owner){
     $allowState = 0;
     $allowDelete = 0;
 }
-					if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
+
+if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
 						$show = true;
 						?>
 						    <div>
@@ -50,11 +55,11 @@ if ($loginuser == $owner){
 							$date = date_create_from_format('Y-m-j', $item->date);
 							$datest = date_format($date, 'd M Y');
 							$datesth = date_format($date, 'F d');
-							$display = '<br/>' . $datesth . '</a> <strong>';
+							$display = '<br/><strong>' . $datesth . '';
 							
 							if (!empty($item->title))
 							{
-							$display .= $item->title;    
+							$display .= ' - ' . $item->title . ' with ';    
 							}
 							
 							if (!empty($item->nameid)) 
@@ -72,7 +77,7 @@ if ($loginuser == $owner){
 							
 							if ((!empty($item->title)) && (!empty($item->nameid)))
 							{
-							$display .= ' with ' . $nameidname; 
+							$display .= '' . $nameidname; 
 							}
 							
 							if ((empty($item->title)) && (!empty($item->nameid)))
@@ -84,14 +89,14 @@ if ($loginuser == $owner){
 							{
 							$user = JFactory::getUser($item->owner);
 							$username = $user->get('username');
-							$display .= ' and ' . $username;    
+							$display .= ' by ' . $username;    
 							}
 							
 							if ((empty($item->nameid)) && (!empty($item->owner)))
 							{
 							$user = JFactory::getUser($item->owner);
 							$username = $user->get('username');
-							$display .= ' with ' . $username;    
+							$display .= ' by ' . $username;    
 							}		
 							
 							$display .= '</strong>';
@@ -110,7 +115,7 @@ if ($loginuser == $owner){
          //$caption = '&caption="Training on " . $this->item->date';
          //$description = "HPR line 1<center></center>line 2<center></center>line 3";
          
-	 $description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Click on link above to see detail';
+	 $description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Link to details above';
 	 $fdescription = $datest . ' ' . $item->title . ' on Gundog Diary. ' ;
 	 //FIX handle long titles so only 140 characters in tweet
  	 $tdescription = $datest . ' ' . $item->title . '&#46; Gundog Diary: ' ;
@@ -132,10 +137,10 @@ if ($loginuser == $owner){
 ?>
 							
 <?php if(!$allowEdit): ?>
-<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $display; ?>
+<?php echo $display; ?>
 
 <?php else: ?>
-<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $display; ?>
+<?php echo $display; ?>
 
 <?php endif; ?>
 							
@@ -146,9 +151,20 @@ echo '<br/>&nbsp;&nbsp;' . $item->notes . '';
 }
 ?>
 <br/>
+
+&nbsp;&nbsp;
+<?php if(!$allowEdit): ?>
+<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitem&id=' . (int)$item->id); ?>"><?php echo $readmore; ?></a>
+
+<?php else: ?>
+<a href="<?php echo JRoute::_('index.php?option=com_diary&view=diaryitemform&id=' . (int)$item->id); ?>"><?php echo $readmoreEdit; ?></a>
+
+<?php endif; ?>
+
 <?php if(($allowState) & ($displayPublish == 1)): ?>
 <br/>
 &nbsp;&nbsp;
+
 <?php if($item->state == 1): ?>
 <?php echo JText::_("COM_DIARY_PUBLISH_ITEM"); ?>
 &nbsp;<a class="icon-publish" href="javascript:document.getElementById('form-diaryitem-state-<?php echo $item->id; ?>').submit()">
@@ -172,6 +188,9 @@ echo '<br/>&nbsp;&nbsp;' . $item->notes . '';
 											<?php echo JHtml::_('form.token'); ?>
 </form>
 <?php endif;
+
+
+
 
 if($allowDelete):?>
 <script type="text/javascript">

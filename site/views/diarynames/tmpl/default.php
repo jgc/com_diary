@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 
 <?php
 
-$displayDelete = 0;
+$displayDelete = 1;
 $displayPublish = 0;
 
 $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
@@ -114,9 +114,10 @@ endif; ?></a>
 
 <?php if($allowDelete && $displayDelete):?>
 
-
-<a href="javascript:deleteItem(<?php echo $item->id; ?>);">
-<?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo JText::_("COM_DIARY_DELETE_ITEM"); ?>
+&nbsp;<a class="icon-trash" href="javascript:deleteItem(<?php echo $item->id; ?>);"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
 
 <form id="form-diaryname-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryname.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />

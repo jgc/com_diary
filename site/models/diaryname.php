@@ -244,6 +244,25 @@ class DiaryModelDiaryname extends JModelForm
             JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
             return false;
         }
+
+	// check diaryname not used on a diary item
+        $nameidcount = 0;
+	
+	$db = JFactory::getDbo();
+	$query = $db->getQuery(true);
+	$query->select('COUNT(*)');
+	$query->from($db->quoteName('#__diaryitems'));
+	$query->where($db->quoteName('nameid')." = ".$db->quote($id));
+	 
+	// Reset the query using our newly populated query object.
+	$db->setQuery($query);
+	$nameidcount = $db->loadResult();
+	        
+        if($nameidcount > 0){
+            JFactory::getApplication()->enqueueMessage('This Dog is referenced by a Diary entry.  Please remove the reference before trying to delete the dog.', 'warning');
+            return false;
+        }
+
         $table = $this->getTable();
         if ($table->delete($data['id']) === true) {
             return $id;
