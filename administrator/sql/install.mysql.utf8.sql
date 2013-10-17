@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `#__diaryitems` (
   `photo2` text NOT NULL,
   `photo3` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__diarynames` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -28,11 +28,11 @@ CREATE TABLE IF NOT EXISTS `#__diarynames` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_by` int(11) NOT NULL,
-  `owner` int(11) NOT NULL, 
+  `owner` int(11) NOT NULL,
   `pname` varchar(255) NOT NULL,
   `rname` varchar(255) NOT NULL,
   `rnumber` varchar(255) NOT NULL,
   `dob` date NOT NULL,
   `notes` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
