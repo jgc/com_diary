@@ -47,12 +47,10 @@
             cols="100"
             rows="8" /> 
 
-       <field name="nameid" type="text"             
+       <field name="nameid" type="namepname"             
             label="COM_DIARY_FORM_LBL_DIARYNAME_DOG"
             description="COM_DIARY_FORM_DESC_DIARYNAME_DOG" 
-            filter="safehtml"
-            size="25"
-            maxlength="255" /> 
+            filter="safehtml" /> 
 
        <field name="created_by" type="createdby" default="" 
             label="COM_DIARY_FORM_LBL_DIARYNAME_CREATED_BY"
