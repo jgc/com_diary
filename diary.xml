@@ -13,6 +13,11 @@
     <!-- Runs on install/uninstall/update; New in 2.5 -->
     <scriptfile>script.php</scriptfile>
     
+    <update> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/update.mysql.utf8.sql</file>
+        </sql>
+    </update>
     <install> <!-- Runs on install -->
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
