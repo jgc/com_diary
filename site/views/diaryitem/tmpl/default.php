@@ -62,35 +62,52 @@ if ($loginuser == $owner){
     <div class="item_fields">
 
 			<br/>
-			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DATE') . '</strong>'; ?>
-			<?php echo $this->item->date; ?>
+			<?php if (!empty($this->item->date)): ?>	
+			<div><?php echo '<strong>'; ?>
+			<?php echo $this->item->date; ?></div>
+			<?php endif; ?>
 			
-			<?php if (!empty($this->nameid)): ?>
+			<?php if (!empty($this->item->nameid)): ?>
 			<?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
-			<?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DOG') . '</strong>'; ?>
+			<?php echo '<div><strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DOG') . '</strong>'; ?>
 			<?php echo $this->item->nameid; ?></div>
 			<?php endif; ?>
 
-			</div><br/>
+			<?php if (!empty($this->item->title)): ?>	
+			<div><?php echo '<strong>'; ?>
+			<?php echo $this->item->title . '</strong>'; ?></div><br/>
+			<?php endif; ?>
 
-			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_TITLE') . '</strong>'; ?>
-			<?php echo $this->item->title; ?></div><br/>
-			
+			<?php if (!empty($this->item->notes)): ?>			
 			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_NOTES') . '</strong>'; ?><br/>
 			<?php echo $this->item->notes; ?></div><br/>
-			
-			<div><?php echo '<strong>Youtube video/s</strong>'; ?><br/>
-			<div align="left"><iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<?php endif; ?>
+
+<?php //FIX code - make loop for video and images ?>			
+			<?php if ((!empty($this->item->youtube1)) && (!empty($this->item->youtube2))): ?>
+			<div><?php echo '<strong>Youtube video/s</strong>'; ?></div>
+			<?php if (!empty($this->item->youtube1)): ?>
+			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<?php endif; ?>
+			<?php if (!empty($this->item->youtube2)): ?>			
 			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div><br/>
-			
-			<div><?php echo '<strong>Photo/s</strong>'; ?><br/>
-			<div align="left"><iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->photo1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->photo2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div><br/>
-			<p>
+			<?php endif; ?>
+			<br/>
+			<?php endif; ?>
+
+			<?php if ((!empty($this->item->photo1)) && (!empty($this->item->photo2)) && (!empty($this->item->photo3))): ?>
+			<div><?php echo '<strong>Photo/s</strong>'; ?></div>
+			<?php if (!empty($this->item->photo1)): ?>
 			<img src="images/diarysocial/<?php echo $this->item->photo1; ?>" alt="" style="float:left" width="40%">
+			<?php endif; ?>
+			<?php if (!empty($this->item->photo2)): ?>
 			<img src="images/diarysocial/<?php echo $this->item->photo2; ?>" alt="" style="float:rigth" width="40%">
-			<img src="images/diarysocial/<?php echo $this->item->photo1; ?>" alt="" style="float:left" width="40%">
-			</p>
+			<?php endif; ?>
+			<?php if (!empty($this->item->photo3)): ?>
+			<img src="images/diarysocial/<?php echo $this->item->photo3; ?>" alt="" style="flo3t:left" width="40%">
+			<?php endif; ?>
+			<br/>
+			<?php endif; ?>
 			
 			
    </div>
@@ -117,7 +134,7 @@ if ($loginuser == $owner){
 <input type="hidden" name="jform[photo2]" value="<?php echo $this->item->photo2; ?>" />
 <input type="hidden" name="jform[photo3]" value="<?php echo $this->item->photo3; ?>" />
 
-<input type="hidden" name="jform[dog]" value="<?php echo $this->item->dog; ?>" />
+<input type="hidden" name="jform[nameid]" value="<?php echo $this->item->nameid; ?>" />
 <input type="hidden" name="jform[created_by]" value="<?php echo $this->item->created_by; ?>" />
 <input type="hidden" name="option" value="com_diary" />
 <input type="hidden" name="task" value="diaryitem.remove" />
@@ -157,7 +174,7 @@ if ($loginuser == $owner){
 // picture=http://upload.wikimedia.org/wikipedia/commonsf/fe/American_Brittany_standing.jpg&name=new blog&
 // caption=news and views&description=about gundogs&redirect_uri=http://bloggundog.com
 ?>
-<!--a class="btn" href="<?php echo $feed_url; ?>" target="default">Post to Facebook</a-->							
+							
 							
 <?php
 else:
@@ -167,4 +184,20 @@ else:
 
 endif;
 ?>
+<hr>
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'bloggundog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
 
