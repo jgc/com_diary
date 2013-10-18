@@ -64,28 +64,41 @@ if ($loginuser == $owner){
 			<br/>
 			<?php if (!empty($this->item->date)): ?>	
 			<div><?php echo '<strong>'; ?>
-			<?php echo $this->item->date; ?></div>
+			<?php echo $this->item->date; ?>
 			<?php endif; ?>
 			
-			<?php if (!empty($this->item->nameid)): ?>
-			<?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
-			<?php echo '<div><strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_DOG') . '</strong>'; ?>
-			<?php echo $this->item->nameid; ?></div>
-			<?php endif; ?>
-
 			<?php if (!empty($this->item->title)): ?>	
-			<div><?php echo '<strong>'; ?>
-			<?php echo $this->item->title . '</strong>'; ?></div><br/>
+			:&nbsp;&nbsp;<?php echo '<strong>'; ?>
+			<?php echo $this->item->title . '</strong>'; ?></div>
 			<?php endif; ?>
-
+			
+			</div>
+			
+			<?php if (!empty($this->item->nameid)): ?>
+			<?php
+			echo $item->nameid . ' ';
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$query->select('pname');
+			$query->from($db->quoteName('#__diarynames'));
+			$query->where($db->quoteName('id')." = ".$db->quote($this->item->nameid));
+			$db->setQuery($query);
+			$nameidname = $db->loadResult();
+			//echo $query . ' ' . $result . '<br/>';
+			?>
+			<?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
+			<?php echo '<div><strong>Dog/s:&nbsp;</strong>'; ?>
+			<?php echo ''.$nameidname; ?></div><br/>
+			<?php endif; ?>
+			
 			<?php if (!empty($this->item->notes)): ?>			
 			<div><?php echo '<strong>' . JText::_('COM_DIARY_FORM_LBL_DIARYITEM_NOTES') . '</strong>'; ?><br/>
 			<?php echo $this->item->notes; ?></div><br/>
 			<?php endif; ?>
 
 <?php //FIX code - make loop for video and images ?>			
-			<?php if ((!empty($this->item->youtube1)) && (!empty($this->item->youtube2))): ?>
-			<div><?php echo '<strong>Youtube video/s</strong>'; ?></div>
+			<?php if ((!empty($this->item->youtube1)) or (!empty($this->item->youtube2))): ?>
+			<div><?php echo '<strong>Video/s</strong>'; ?></div>
 			<?php if (!empty($this->item->youtube1)): ?>
 			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<?php endif; ?>

@@ -29,13 +29,10 @@
             cols="100"
             rows="8" /> 
 
-      	<field name="nameid" type="sql"
-	      label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
-	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG" 
-	      query="SELECT id, pname FROM #__diarynames"
-	      key_field="id"
-	      value_field="pname" />
-
+	<field name="nameid" type="text" 
+	  	label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
+		description="COM_DIARY_FORM_DESC_DIARYITEM_DOG"  />
+	      	      
 	<field name="youtube1" type="youtubedisplay" 
            	label="Youtube video 1"
             	description="Add the link to a Youtube video"  /> 
