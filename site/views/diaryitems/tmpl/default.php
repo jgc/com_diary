@@ -82,7 +82,7 @@ if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
 							
 							if ((empty($item->title)) && (!empty($item->nameid)))
 							{
-							$display .= $nameidname; 
+							$display .= ' ' . $nameidname; 
 							}
 							
 							if ((!empty($item->nameid)) && (!empty($item->owner)))
