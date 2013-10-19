@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `#__diaryitems` (
+CREATE TABLE `#__diaryitems` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL,
@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS `#__diaryitems` (
   PRIMARY KEY (`id`)
 )  DEFAULT CHARSET=utf8;
 
-
-CREATE TABLE IF NOT EXISTS `#__diarynames` (
+CREATE TABLE `#__diarynames` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL,
