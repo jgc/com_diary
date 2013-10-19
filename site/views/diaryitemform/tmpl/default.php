@@ -158,21 +158,21 @@ echo $nheading;
 
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'details', 'Details'); ?>
 			
-            		<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('viewstatus'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('viewstatus'); ?></div>
-			</div>
-			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
-			</div>
+
+				<?php echo $this->form->getLabel('id'); ?>
+				<?php echo $this->form->getInput('id'); ?>
+
+				<?php echo $this->form->getLabel('viewstatus'); ?>
+				<?php echo $this->form->getInput('viewstatus'); ?>
+
+				<?php echo $this->form->getLabel('state'); ?>
+				<?php echo $this->form->getInput('state'); ?>
+
+			
 			<?php if(!$this->item->id){
-			    echo '<div class="controls"><input type="hidden" name="jform[owner]" value="'. $loginuser .'"/>';
+			    echo '<input type="hidden" name="jform[owner]" value="'. $loginuser .'"/>';
 			} ?>
+			
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('date'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('date'); ?></div> 
