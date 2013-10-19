@@ -5,6 +5,10 @@
  * @copyright   Copyright (C) 2013 FalcoAccipiter. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  * @author      FalcoAccipiter <admin@falcoaccipiter.com> - http://www.falcoaccipiter.com
+ *
+ * Notes
+ * Tabs: http://forum.joomla.org/viewtopic.php?f=721&t=773596
+ * http://itprism.com/blog/106-bootstrap-tabs-accordion-slides
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -12,6 +16,7 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+jimport('joomla.html.html.bootstrap');
 
 //Load admin language file
 $lang = JFactory::getLanguage();
@@ -21,6 +26,7 @@ $lang->load('com_diary', JPATH_ADMINISTRATOR);
 <!-- Styling for making front end forms look OK -->
 <!-- This should probably be moved to the template CSS file -->
 <style>
+   
     .front-end-edit ul {
         padding: 0 !important;
     }
@@ -62,6 +68,7 @@ $lang->load('com_diary', JPATH_ADMINISTRATOR);
         color: #444;
     }
 
+ 
     fieldset.radio label{
         width: 50px !important;
     }
@@ -135,12 +142,22 @@ $nheading = '<h2 class="item-title">Edit '.$pheading.'</h2>';}
 echo $nheading;
 ?>
 <br/>
-<?php if($allowEdit): ?>
 
+<?php if($allowEdit): ?>
+    	
 <div class="diaryitem-edit front-end-edit"> 
    
-    <form id="form-diaryitem" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
-        <ul>
+<form id="form-diaryitem" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
+  
+<?php echo JLayoutHelper::render('joomla.edit.item_title', $this); ?>  
+
+<!-- Begin Banner -->
+<div class="span10 form-horizontal">
+	<fieldset>
+		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'details')); ?>
+
+			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'details', 'Details'); ?>
+			
             		<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
@@ -176,6 +193,10 @@ echo $nheading;
 				<div class="controls"><?php echo $this->form->getInput('notes'); ?></div>
 			</div>
 
+<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', 'Photos / video'); ?>
+
 
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('youtube1'); ?></div>
@@ -185,29 +206,58 @@ echo $nheading;
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('youtube2'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('youtube2'); ?></div>
+
 			</div>
 
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('photo1'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('photo1'); ?></div>
+				<div class="controls"><table><tr><td><?php echo $this->form->getInput('photo1'); ?></td></tr>
+				<?php if (!empty($this->item->photo1)) : ?>
+				<tr><td>
+				<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo1, true);?>" alt="Uploaded image" width = "210" />
+				<a href="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo1, true);?>" target="_blank"><?php echo "&nbsp;&nbsp;View File"; ?></a>
+				</td></tr>
+				<?php endif; ?>
+				</table>	
+				</div>
 			</div>
-
-
+				
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('photo2'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('photo2'); ?></div>
+				<div class="controls"><table><tr><td><?php echo $this->form->getInput('photo2'); ?></td></tr>
+				<?php if (!empty($this->item->photo1)) : ?>
+				<tr><td>
+				<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo2, true);?>" alt="Uploaded image" width = "210" />
+				<a href="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo2, true);?>" target="_blank"><?php echo "&nbsp;&nbsp;View File"; ?></a>
+				</td></tr>
+				<?php endif; ?>
+				</table>	
+				</div>
 			</div>
 
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('photo3'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('photo3'); ?></div>
+				<div class="controls"><table><tr><td><?php echo $this->form->getInput('photo3'); ?></td></tr>
+				<?php if (!empty($this->item->photo1)) : ?>
+				<tr><td>
+				<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo3, true);?>" alt="Uploaded image" width = "210" />
+				<a href="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo3, true);?>" target="_blank"><?php echo "&nbsp;&nbsp;View File"; ?></a>
+				</td></tr>
+				<?php endif; ?>
+				</table>	
+				</div>
 			</div>
 
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div>
-		</ul>
+
+				
+<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+</fieldset>
 
         <div>
         <br/>
@@ -220,7 +270,9 @@ echo $nheading;
             <?php echo JHtml::_('form.token'); ?>
         </div>
     </form>
-    <?php else: ?>
+  </div>  
+
+<?php else: ?>
     <div class="diaryitem-edit front-end-edit">
     <?php
             $error = JText::_('COM_DIARY_ITEM_NOT_LOADED');

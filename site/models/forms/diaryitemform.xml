@@ -5,43 +5,43 @@
 <fieldset>
 
 <field name="id" type="hidden" default="0" label="COM_DIARY_FORM_LBL_DIARYITEM_ID"
-            readonly="true" class="readonly"
-            description="JGLOBAL_FIELD_ID_DESC" /> 
+        readonly="true" class="readonly"
+        description="JGLOBAL_FIELD_ID_DESC" /> 
 
 <field name="owner" type="user"
-            readonly="true" class="readonly"
-            label="COM_DIARY_FORM_LBL_DIARYITEM_OWNER"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER"  /> 
+        readonly="true" class="readonly"
+        label="COM_DIARY_FORM_LBL_DIARYITEM_OWNER"
+        description="COM_DIARY_FORM_DESC_DIARYITEM_OWNER"  /> 
 
 <field name="date" 
-    type="calendar" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_DATE"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_DATE" 
-    format="%Y-%m-%d"
-    required="true"
-    default="now"
-    filter="user_utc" />
+	type="calendar" 
+        label="COM_DIARY_FORM_LBL_DIARYITEM_DATE"
+        description="COM_DIARY_FORM_DESC_DIARYITEM_DATE" 
+	format="%Y-%m-%d"
+	required="true"
+	default="now"
+	filter="user_utc" />
 
 <field name="title" type="text" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_TITLE"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_TITLE" 
-            filter="safehtml"
-            size="20"
-            maxlength="25" /> 
+        label="COM_DIARY_FORM_LBL_DIARYITEM_TITLE"
+        description="COM_DIARY_FORM_DESC_DIARYITEM_TITLE" 
+        filter="safehtml"
+        size="20"
+        maxlength="25" /> 
 
 <field name="notes" type="textarea"     
-            label="COM_DIARY_FORM_LBL_DIARYITEM_NOTES"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_NOTES" 
-            cols="100"
-            rows="8" /> 
+        label="COM_DIARY_FORM_LBL_DIARYITEM_NOTES"
+        description="COM_DIARY_FORM_DESC_DIARYITEM_NOTES" 
+        cols="100"
+        rows="8" /> 
 
 <field name="nameid" type="namepname" default=""
-	      label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
-	      description="COM_DIARY_FORM_DESC_DIARYITEM_DOG"  />
+	label="COM_DIARY_FORM_LBL_DIARYITEM_DOG"
+	description="COM_DIARY_FORM_DESC_DIARYITEM_DOG"  />
 	      
 <field name="youtube1" type="youtubedisplay" 
-            label="Youtube video 1"
-            description="Add the link to a Youtube video"  /> 
+        label="Youtube video 1"
+        description="Add the link to a Youtube video"  /> 
 
 <field name="youtube2" type="youtubedisplay" 
         label="Youtube video 2"
@@ -53,24 +53,24 @@
        size="10"
        accept="image/*" />
 
-       <field name="photo2" type="file" 
+<field name="photo2" type="file" 
        label="Add photo 2" 
        description="Choose an image from your computer with maximum 100KB" 
        size="10" 
        accept="image/*" />
        
-       <field name="photo3" type="file" 
+<field name="photo3" type="file" 
        label="Add photo 3" 
        description="Choose an image from your computer with maximum 100KB" 
        size="10" 
        accept="image/*" />       
     
        
-       <field name="created_by" type="createdby" default="" 
-            label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
-            description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
+<field name="created_by" type="createdby" default="" 
+        label="COM_DIARY_FORM_LBL_DIARYITEM_CREATED_BY"
+        description="COM_DIARY_FORM_DESC_DIARYITEM_CREATED_BY"  /> 
 
-    <field
+<field
         name="view"
         type="list"
         label="View status"
@@ -80,7 +80,7 @@
         default="1">
         <option value="1">JPUBLISHED</option>
         <option value="0">JUNPUBLISHED</option>
-    </field>
+</field>
     
 <field name="viewstatus" type="hidden" default="1"
         label="View status"

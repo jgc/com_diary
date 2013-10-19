@@ -45,11 +45,11 @@ class JFormFieldYoutubedisplay extends JFormField
        			$vstringerror = 1;
 		}
 		$inputpl = 'e.g. kfEy-XpGj2U'; 
-		$inputst = '<input name="' . $this->name . '" type="text" size="20" maxlength="20" value="' . $video . '" placeholder = "' . $inputpl .'" >';
-		$videost = '<div align="middle"><iframe width="280" height="210" src="//www.youtube.com/embed/' . $video . '?rel=0" frameborder="0" allowfullscreen></iframe></div><br/>';
+		$inputst = '<table><tr><td valign="top"><input name="' . $this->name . '" type="text" size="20" maxlength="20" value="' . $video . '" placeholder = "' . $inputpl .'" ></td></tr>';
+		$videost = '<tr><td><iframe width="220" height="165" src="//www.youtube.com/embed/' . $video . '?rel=0" frameborder="0" allowfullscreen></iframe></td><td><a href="http://www.youtube.com" target="_blank">&nbsp;&nbsp;Open<br/>&nbsp;&nbsp;Youtube</a></td></tr></table>';
 		 
        		if (empty($video)){
-    			$html[] = $inputst;
+    			$html[] = $inputst . '</table>';
        		}
        		
        		if ((!empty($video)) && (!$vstringerror)) {
