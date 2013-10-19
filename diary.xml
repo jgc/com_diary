@@ -9,7 +9,10 @@
     <authorUrl>http://www.falcoaccipiter.com</authorUrl>
     <version>1.0.0</version>
     <description></description>
-  
+    
+    <!-- Runs on install/uninstall/update; New in 2.5 -->
+    <scriptfile>script.php</scriptfile>
+    
     <install> <!-- Runs on install -->
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
