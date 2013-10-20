@@ -107,10 +107,10 @@ if ($loginuser == $owner){
 			<?php if ((!empty($this->item->youtube1)) or (!empty($this->item->youtube2))): ?>
 			<div><?php echo '<strong>Video/s</strong>'; ?></div><div>
 			<?php if (!empty($this->item->youtube1)): ?>
-			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<iframe width="48%" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<?php endif; ?>
 			<?php if (!empty($this->item->youtube2)): ?>			
-			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<iframe width="48%" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<?php endif; ?>
 			</div><br/>
 			<?php endif; ?>
@@ -119,13 +119,13 @@ if ($loginuser == $owner){
 			<?php if ((!empty($this->item->photo1)) or (!empty($this->item->photo2)) or (!empty($this->item->photo3))): ?>
 			<div><?php echo '<strong>Photo/s</strong>'; ?></div><div>
 			<?php if (!empty($this->item->photo1)): ?>
-			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo1, true);?>" alt="<?php echo $this->item->photo1; ?>" width = "280" />
+			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo1, true);?>" alt="<?php echo $this->item->photo1; ?>" width = "48%" />
 			<?php endif; ?>
 			<?php if (!empty($this->item->photo2)): ?>
-			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo2, true);?>" alt="<?php echo $this->item->photo2; ?>" width = "280" />
+			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo2, true);?>" alt="<?php echo $this->item->photo2; ?>" width = "48%" />
 			<?php endif; ?>
 			<?php if (!empty($this->item->photo3)): ?>
-			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo3, true);?>" alt="<?php echo $this->item->photo3; ?>" width = "280" />
+			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo3, true);?>" alt="<?php echo $this->item->photo3; ?>" width = "48%" />
 			<?php endif; ?>
 			</div><br/><br/>
 			<?php endif; ?>
