@@ -106,18 +106,6 @@ if ($loginuser == $owner){
 			<?php endif; ?>
 
 <?php //FIX code - make loop for video and images ?>			
-			<?php if ((!empty($this->item->youtube1)) or (!empty($this->item->youtube2))): ?>
-			<div><?php echo '<strong>Video/s</strong>'; ?></div><div>
-			<?php if (!empty($this->item->youtube1)): ?>
-			<iframe width="48%" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-			<?php endif; ?>
-			<?php if (!empty($this->item->youtube2)): ?>			
-			<iframe width="48%" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-			<?php endif; ?>
-			</div><br/>
-			<?php endif; ?>
-			
-
 			<?php if ((!empty($this->item->photo1)) or (!empty($this->item->photo2)) or (!empty($this->item->photo3))): ?>
 			<div><?php echo '<strong>Photo/s</strong>'; ?></div><div>
 			<?php if (!empty($this->item->photo1)): ?>
@@ -132,7 +120,16 @@ if ($loginuser == $owner){
 			</div><br/><br/>
 			<?php endif; ?>
 
-			
+			<?php if ((!empty($this->item->youtube1)) or (!empty($this->item->youtube2))): ?>
+			<div><?php echo '<strong>Video/s</strong>'; ?></div><div>
+			<?php if (!empty($this->item->youtube1)): ?>
+			<iframe width="48%" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<?php endif; ?>
+			<?php if (!empty($this->item->youtube2)): ?>			
+			<iframe width="48%" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+			<?php endif; ?>
+			</div><br/>
+			<?php endif; ?>			
 
    
 <?php if($canEdit): ?>
