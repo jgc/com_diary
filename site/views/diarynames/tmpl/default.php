@@ -136,7 +136,6 @@ endif; ?></a>
 <?php endif; ?>
 <br/><br/>
 </div>
-<br/>
 
 <?php endif; ?>
 
