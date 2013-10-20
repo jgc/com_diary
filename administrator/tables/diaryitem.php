@@ -79,8 +79,9 @@ class DiaryTablediaryitem extends JTable {
 
 						//Check for filesize
 						$fileSize = $file['size']['fileupload'];
-						if($fileSize > 524288000):
-							JError::raiseWarning(500, 'File bigger than 500MB' );
+						// if($fileSize > 524288000):
+						if($fileSize > 524288):
+							JError::raiseWarning(500, 'File bigger than 500KB' );
 							return false;
 						endif;
 
@@ -158,11 +159,11 @@ class DiaryTablediaryitem extends JTable {
     private function JAccessRulestoArray($jaccessrules){
         $rules = array();
         foreach($jaccessrules as $action => $jaccess){
-            $actions = array();
-            foreach($jaccess->getData() as $group => $allow){
-                $actions[$group] = ((bool)$allow);
-            }
-            $rules[$action] = $actions;
+            //$actions = array();
+            //foreach($jaccess->getData() as $group => $allow){
+            //    $actions[$group] = ((bool)$allow);
+            //}
+            //$rules[$action] = $actions;
         }
         return $rules;
     }

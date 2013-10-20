@@ -15,11 +15,12 @@ $readmore = "<strong>Read more ...</strong>&nbsp;";
 $readmoreEdit = "<strong>Edit / Read more ...</strong>&nbsp;";
 
 
-$pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
+// $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' also works
+$pheading = "Latest diary entries";
 if ($pheading != ""){
     echo '<h2 class="item-title">'.$pheading.'</h2>';
 } else {
-    echo '<h2 class="item-title">Diary entries</h2>';
+    echo '<h2 class="item-title">Latest diary entries</h2>';
 }
                       
 ?>
@@ -55,13 +56,15 @@ if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
 							$date = date_create_from_format('Y-m-j', $item->date);
 							$datest = date_format($date, 'd M Y');
 							$datesth = date_format($date, 'F d');
-							$display = '<br/><strong>' . $datesth . '';
+							$display = '<br/><strong>' . $datesth . '</strong>&nbsp;&nbsp;';
 							
 							if (!empty($item->title))
 							{
-							$display .= ' - ' . $item->title . ' with ';    
+							$display .= ' ' . ucfirst($item->title) . '';    
 							}
-							
+
+							//$display .= '</strong>';
+
 							if (!empty($item->nameid)) 
 							{
 							//echo $item->nameid . '<br/>';
@@ -73,34 +76,18 @@ if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
 							$db->setQuery($query);
 							$nameidname = $db->loadResult();
 							//echo $query . ' ' . $result . '<br/>';
+							$display .= ' with ' . ucfirst($nameidname) . ''; 
 							}
 							
-							if ((!empty($item->title)) && (!empty($item->nameid)))
-							{
-							$display .= '' . $nameidname; 
-							}
-							
-							if ((empty($item->title)) && (!empty($item->nameid)))
-							{
-							$display .= ' ' . $nameidname; 
-							}
-							
-							if ((!empty($item->nameid)) && (!empty($item->owner)))
+							if (!empty($item->owner))
 							{
 							$user = JFactory::getUser($item->owner);
 							//$username = $user->get('username');
 							$username = $user->get('name');
-							$display .= ' by ' . $username;    
+							$display .= ' [by ' . ucfirst($username) . ']';    
 							}
-							
-							if ((empty($item->nameid)) && (!empty($item->owner)))
-							{
-							$user = JFactory::getUser($item->owner);
-							$username = $user->get('username');
-							$display .= ' by ' . $username;    
-							}		
-							
-							$display .= '</strong>';
+														
+							//$display .= '</strong>';
 							//$display .= '</a>';
 							
          $app_id = "340031409395063";
@@ -116,10 +103,18 @@ if(($item->state == 1 || ($item->state == 0 && $allowEdit)) or $viewState):
          //$caption = '&caption="Training on " . $this->item->date';
          //$description = "HPR line 1<center></center>line 2<center></center>line 3";
          
-	 $description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Link to details above';
-	 $fdescription = $datest . ' ' . $item->title . ' on Gundog Diary. ' ;
-	 //FIX handle long titles so only 140 characters in tweet
- 	 $tdescription = $datest . ' ' . $item->title . '&#46; Gundog Diary: ' ;
+         if (!empty($item->title)){
+	 	$description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Link to details above';
+	 	$fdescription = $datest . ' ' . $item->title . ' on Gundog Diary. ' ;
+	 	//FIX handle long titles so only 140 characters in tweet
+ 	 	$tdescription = $datest . ' ' . $item->title . '&#46; Gundog Diary. ' ;         
+         } else {
+         	$description = $datest . ' ' . $item->title . '<center></center>&nbsp;<center></center>Link to details above';
+	 	$fdescription = $datest . ' on Gundog Diary ' ;
+	 	//FIX handle long titles so only 140 characters in tweet
+ 	 	$tdescription = $datest . ' on Gundog Diary ' ;
+         }
+	
          //$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . "&link=" . $link . "&picture=" . $picture . "&name=" . $name . "&caption=" . $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;
 
   	$feed_url = "http://www.facebook.com/dialog/feed?app_id=". $app_id . $link . $picture . $name .  $caption . "&description=" . $description . "&redirect_uri=" . $canvas_page . "&message=" . $message;
@@ -213,7 +208,7 @@ if($allowDelete):?>
 											<input type="hidden" name="jform[date]" value="<?php echo $item->date; ?>" />
 											<input type="hidden" name="jform[title]" value="<?php echo $item->title; ?>" />
 											<input type="hidden" name="jform[notes]" value="<?php echo $item->notes; ?>" />
-											<input type="hidden" name="jform[dog]" value="<?php echo $item->dog; ?>" />
+											<input type="hidden" name="jform[nameid]" value="<?php echo $item->nameid; ?>" />
 											<input type="hidden" name="jform[created_by]" value="<?php echo $item->created_by; ?>" />
 											<input type="hidden" name="option" value="com_diary" />
 											<input type="hidden" name="task" value="diaryitem.remove" />
@@ -224,12 +219,12 @@ if($allowDelete):?>
 &nbsp;&nbsp;
 
 <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-<a href="https://twitter.com/intent/tweet?text=<?php echo $tdescription; ?>&url=<?php echo $tlink; ?>&related="><img src="<?php echo JURI::root();?>images/diarysocial/bird_blue_16.png" alt="Tweet" /></a>
+<a href="https://twitter.com/intent/tweet?text=<?php echo $tdescription; ?>&url=<?php echo $tlink; ?>&related="><img src="<?php echo JURI::root();?>images/diarysocial/bird_blue_16.png" width="20px" alt="Tweet" /></a>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <a href="<?php echo $feed_url; ?>" target="default">
-<img src="<?php echo JURI::root();?>images/diarysocial/facebook.png" width="16px" padding="5" alt="Publish to Facebook"></a>
+<img src="<?php echo JURI::root();?>images/diarysocial/facebook.png" width="20px" padding="5" alt="Publish to Facebook"></a>
 
 </div>
 <br/>
@@ -246,7 +241,6 @@ if($allowDelete):?>
         ?>
 
 </div>
-<br/><br/>
 
 <?php if ($show): ?>
     <div class="pagination">

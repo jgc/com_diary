@@ -63,13 +63,17 @@ if ($loginuser == $owner){
 
 			<br/>
 			<?php if (!empty($this->item->date)): ?>	
-			<div><?php echo '<strong>'; ?>
-			<?php echo $this->item->date; ?>
+			<?php 
+				$date = date_create_from_format('Y-m-j', $this->item->date);
+				$datest = date_format($date, 'd M Y');
+				$datesth = date_format($date, 'd F Y');
+				$display = '<div><strong>' . $datesth . '</strong>&nbsp;&nbsp;';
+				echo $display;
+			?>
 			<?php endif; ?>
 			
 			<?php if (!empty($this->item->title)): ?>	
-			:&nbsp;&nbsp;<?php echo '<strong>'; ?>
-			<?php echo $this->item->title . '</strong>'; ?></div>
+			<?php echo '' . $this->item->title . '</strong>'; ?></div>
 			<?php endif; ?>
 			
 			</div>
@@ -103,29 +107,30 @@ if ($loginuser == $owner){
 			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<?php endif; ?>
 			<?php if (!empty($this->item->youtube2)): ?>			
-			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div><br/>
+			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div>
 			<?php endif; ?>
 			<br/>
 			<?php endif; ?>
+			
 
-			<?php if ((!empty($this->item->photo1)) && (!empty($this->item->photo2)) && (!empty($this->item->photo3))): ?>
+			<?php if ((!empty($this->item->photo1)) or (!empty($this->item->photo2)) or (!empty($this->item->photo3))): ?>
 			<div><?php echo '<strong>Photo/s</strong>'; ?></div>
 			<?php if (!empty($this->item->photo1)): ?>
-			<img src="images/diarysocial/<?php echo $this->item->photo1; ?>" alt="" style="float:left" width="40%">
+			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo1, true);?>" alt="<?php echo $this->item->photo1; ?>" width = "280" />
 			<?php endif; ?>
 			<?php if (!empty($this->item->photo2)): ?>
-			<img src="images/diarysocial/<?php echo $this->item->photo2; ?>" alt="" style="float:rigth" width="40%">
+			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo2, true);?>" alt="<?php echo $this->item->photo2; ?>" width = "280" />
 			<?php endif; ?>
 			<?php if (!empty($this->item->photo3)): ?>
-			<img src="images/diarysocial/<?php echo $this->item->photo3; ?>" alt="" style="flo3t:left" width="40%">
+			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo3, true);?>" alt="<?php echo $this->item->photo3; ?>" width = "280" />
 			<?php endif; ?>
-			<br/>
+			<br/><br/>
 			<?php endif; ?>
+
 			
-			
-   </div>
+
    
-    <?php if($canEdit): ?>
+<?php if($canEdit): ?>
 		<a href="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.edit&id='.$this->item->id); ?>"><?php echo JText::_("COM_DIARY_EDIT_ITEM"); ?></a>
 	<?php endif; ?>
 								<?php if($allowDeleteX): //FIX - remove all together
@@ -212,5 +217,7 @@ endif;
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</div>
     
 
