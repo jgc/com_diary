@@ -76,10 +76,12 @@ if ($loginuser == $owner){
 			<?php endif; ?>
 			
 			<?php if (!empty($this->item->title)): ?>	
-			<?php echo '' . $this->item->title . '</strong>'; ?></div>
+			<?php echo '' . $this->item->title . '</strong></div>'; ?>
 			<?php endif; ?>
 			
-
+			<?php if (empty($this->item->title)): ?>	
+			<?php echo '</strong></div>'; ?>
+			<?php endif; ?>
 			
 			<?php if (!empty($this->item->nameid)): ?>
 			<?php

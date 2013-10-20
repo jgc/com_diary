@@ -149,10 +149,11 @@ echo $nheading;
    
 <form id="form-diaryitem" action="<?php echo JRoute::_('index.php?option=com_diary&task=diaryitem.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
   
-<?php //echo JLayoutHelper::render('joomla.edit.item_title', $this); ?>  
+<?php //echo JLayoutHelper::render('joomla.edit.item_title', $this); ?>
+<?php
 // echos text in 'title' field - does this do anything else? Need to investigate
 // https://groups.google.com/forum/#!topic/joomla-dev-general/jGkKXQi1948
-
+?>
 <!-- Begin Banner -->
 <div class="span10 form-horizontal">
 	<fieldset>
