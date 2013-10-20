@@ -148,7 +148,7 @@ endif; ?></a>
         ?>
 
 </div>
-<br/><br/>
+<br/>
 
 <?php if ($show): ?>
     <div class="pagination">
