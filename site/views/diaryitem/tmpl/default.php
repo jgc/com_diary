@@ -18,6 +18,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_diary' . $
 }
 ?>
 
+
 <?php 
 // $pheading = $this->params->get('page_heading', '');  // '$active->page_heading' neither work reliably, see viewdiaryform
 // FIX
@@ -30,6 +31,8 @@ if ($pheading != ""){
     echo '<h2 class="item-title">Diary entry</h2>';
 }
 ?>
+
+<div class="items">
 
 <?php
 $user = JFactory::getUser();
@@ -76,7 +79,7 @@ if ($loginuser == $owner){
 			<?php echo '' . $this->item->title . '</strong>'; ?></div>
 			<?php endif; ?>
 			
-			</div>
+
 			
 			<?php if (!empty($this->item->nameid)): ?>
 			<?php
@@ -102,19 +105,19 @@ if ($loginuser == $owner){
 
 <?php //FIX code - make loop for video and images ?>			
 			<?php if ((!empty($this->item->youtube1)) or (!empty($this->item->youtube2))): ?>
-			<div><?php echo '<strong>Video/s</strong>'; ?></div>
+			<div><?php echo '<strong>Video/s</strong>'; ?></div><div>
 			<?php if (!empty($this->item->youtube1)): ?>
 			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube1; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<?php endif; ?>
 			<?php if (!empty($this->item->youtube2)): ?>			
-			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe></div>
+			<iframe width="280" height="210" src="//www.youtube.com/embed/<?php echo $this->item->youtube2; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<?php endif; ?>
-			<br/>
+			</div><br/>
 			<?php endif; ?>
 			
 
 			<?php if ((!empty($this->item->photo1)) or (!empty($this->item->photo2)) or (!empty($this->item->photo3))): ?>
-			<div><?php echo '<strong>Photo/s</strong>'; ?></div>
+			<div><?php echo '<strong>Photo/s</strong>'; ?></div><div>
 			<?php if (!empty($this->item->photo1)): ?>
 			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo1, true);?>" alt="<?php echo $this->item->photo1; ?>" width = "280" />
 			<?php endif; ?>
@@ -124,7 +127,7 @@ if ($loginuser == $owner){
 			<?php if (!empty($this->item->photo3)): ?>
 			<img src="<?php echo JRoute::_(JUri::base() . 'images/diaryitems' .DIRECTORY_SEPARATOR . $this->item->photo3, true);?>" alt="<?php echo $this->item->photo3; ?>" width = "280" />
 			<?php endif; ?>
-			<br/><br/>
+			</div><br/><br/>
 			<?php endif; ?>
 
 			
@@ -200,9 +203,11 @@ else:
             JFactory::getApplication()->redirect(JURI::base(), $error, 'error' );
             return false;
 
-endif;
-?>
-<hr>
+endif; ?>
+
+</div>
+
+<br/>
 <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -217,7 +222,8 @@ endif;
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+
+
 </div>
     
 
