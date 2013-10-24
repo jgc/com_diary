@@ -44,14 +44,14 @@ class DiaryTablediaryitem extends JTable {
 		if($task == 'apply' || $task == 'save'){
 			$array['modified'] = date("Y-m-d H:i:s");
 		}
-				//Support for file field: fileupload
-				if(isset($_FILES['jform']['name']['fileupload'])):
+			//Support for file field: photo1
+				if(isset($_FILES['jform']['name']['photo1'])):
 					jimport('joomla.filesystem.file');
 					jimport('joomla.filesystem.file');
 					$file = $_FILES['jform'];
 
 					//Check if the server found any error.
-					$fileError = $file['error']['fileupload'];
+					$fileError = $file['error']['photo1'];
 					$message = '';
 					if($fileError > 0 && $fileError != 4) {
 						switch ($fileError) :
@@ -71,38 +71,40 @@ class DiaryTablediaryitem extends JTable {
 						endif;
 					}
 					else if($fileError == 4){
-						if(isset($array['fileupload_hidden'])):;
-							$array['fileupload'] = $array['fileupload_hidden'];
+						if(isset($array['photo1_hidden'])):;
+							$array['photo1'] = $array['photo1_hidden'];
 						endif;
 					}
 					else{
 
 						//Check for filesize
-						$fileSize = $file['size']['fileupload'];
-						// if($fileSize > 524288000):
-						if($fileSize > 524288):
-							JError::raiseWarning(500, 'File bigger than 500KB' );
+						$fileSize = $file['size']['photo1'];
+						if($fileSize > 1048576):
+							JError::raiseWarning(500, 'File bigger than 1MB' );
 							return false;
 						endif;
 
 						//Check for filetype
-						$okMIMETypes = '.jpeg,.jpg,.png,.gif';
+						$okMIMETypes = 'image/jpeg,image/png,image/gif';
 						$validMIMEArray = explode(",",$okMIMETypes);
-						$fileMime = $file['type']['fileupload'];
+						$fileMime = $file['type']['photo1'];
 						if(!in_array($fileMime,$validMIMEArray)):
 							JError::raiseWarning(500,'This filetype is not allowed');
 							return false;
 						endif;
 
 						//Replace any special characters in the filename
-						$filename = explode('.',$file['name']['fileupload']);
+						$filename = explode('.',$file['name']['photo1']);
 						$filename[0] = preg_replace("/[^A-Za-z0-9]/i", "-", $filename[0]);
 
 						//Add Timestamp MD5 to avoid overwriting
 						$filename = md5(time()) . '-' . implode('.',$filename);
-						$uploadPath = JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_diary'.DIRECTORY_SEPARATOR.'dfiles'.DIRECTORY_SEPARATOR.$filename;
-						$fileTemp = $file['tmp_name']['fileupload'];
-
+						// $uploadPath =JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_photo'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename;
+						
+						$uploadPath = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename;
+						
+						$fileTemp = $file['tmp_name']['photo1'];
+						
 						if(!JFile::exists($uploadPath)):
 
 							if (!JFile::upload($fileTemp, $uploadPath)):
@@ -114,10 +116,234 @@ class DiaryTablediaryitem extends JTable {
 							endif;
 
 						endif;
-						$array['fileupload'] = $filename;
-					}
 
-				endif;
+
+// $ofile = JPATH_ROOT . DIRECTORY_SEPARATOR .'raindrops2.jpg'; //works
+// $nfile = JPATH_ROOT . DIRECTORY_SEPARATOR .'xxx.jpg'; //works
+
+$ofile = $uploadPath;//works
+//$nfile = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename.'.jpg'; //works
+//$nfile = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.'q75-'.$filename; //works
+$nfile = $uploadPath;//works
+
+$image=imagecreatefromjpeg($ofile);  // MUST match image type when 
+//imagefilter($image, IMG_FILTER_GRAYSCALE);
+imagefilter($image, IMG_FILTER_SMOOTH, 6);
+imagejpeg($image,$nfile, 75);
+imagedestroy($image);
+//unlink($uploadPath);
+
+$notice = 'ofile: ' . $ofile . '<br/>nfile: ' . $nfile;
+$notice .= '<br/>filename: ' . $filename . '<br/>';
+
+//debug message
+//echo JError::raiseNotice(100,$notice);
+
+$array['photo1'] = $filename;
+}
+
+endif;
+//************************************************************************
+			//Support for file field: photo2
+				if(isset($_FILES['jform']['name']['photo2'])):
+					jimport('joomla.filesystem.file');
+					jimport('joomla.filesystem.file');
+					$file = $_FILES['jform'];
+
+					//Check if the server found any error.
+					$fileError = $file['error']['photo2'];
+					$message = '';
+					if($fileError > 0 && $fileError != 4) {
+						switch ($fileError) :
+							case 1:
+								$message = JText::_( 'File size exceeds allowed by the server');
+								break;
+							case 2:
+								$message = JText::_( 'File size exceeds allowed by the html form');
+								break;
+							case 3:
+								$message = JText::_( 'Partial upload error');
+								break;
+						endswitch;
+						if($message != '') :
+							JError::raiseWarning(500,$message);
+							return false;
+						endif;
+					}
+					else if($fileError == 4){
+						if(isset($array['photo2_hidden'])):;
+							$array['photo2'] = $array['photo2_hidden'];
+						endif;
+					}
+					else{
+
+						//Check for filesize
+						$fileSize = $file['size']['photo2'];
+						if($fileSize > 1048576):
+							JError::raiseWarning(500, 'File bigger than 1MB' );
+							return false;
+						endif;
+
+						//Check for filetype
+						$okMIMETypes = 'image/jpeg,image/png,image/gif';
+						$validMIMEArray = explode(",",$okMIMETypes);
+						$fileMime = $file['type']['photo2'];
+						if(!in_array($fileMime,$validMIMEArray)):
+							JError::raiseWarning(500,'This filetype is not allowed');
+							return false;
+						endif;
+
+						//Replace any special characters in the filename
+						$filename = explode('.',$file['name']['photo2']);
+						$filename[0] = preg_replace("/[^A-Za-z0-9]/i", "-", $filename[0]);
+
+						//Add Timestamp MD5 to avoid overwriting
+						$filename = md5(time()) . '-' . implode('.',$filename);
+						// $uploadPath =JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_photo'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename;
+						
+						$uploadPath = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename;
+						
+						$fileTemp = $file['tmp_name']['photo2'];
+						
+						if(!JFile::exists($uploadPath)):
+
+							if (!JFile::upload($fileTemp, $uploadPath)):
+
+								JError::raiseWarning(500,'Error moving file');
+
+								return false;
+
+							endif;
+
+						endif;
+
+
+// $ofile = JPATH_ROOT . DIRECTORY_SEPARATOR .'raindrops2.jpg'; //works
+// $nfile = JPATH_ROOT . DIRECTORY_SEPARATOR .'xxx.jpg'; //works
+
+$ofile = $uploadPath;//works
+//$nfile = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename.'.jpg'; //works
+//$nfile = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.'q75-'.$filename; //works
+$nfile = $uploadPath;//works
+
+$image=imagecreatefromjpeg($ofile);  // MUST match image type when 
+//imagefilter($image, IMG_FILTER_GRAYSCALE);
+imagefilter($image, IMG_FILTER_SMOOTH, 6);
+imagejpeg($image,$nfile, 75);
+imagedestroy($image);
+//unlink($uploadPath);
+
+$notice = 'ofile: ' . $ofile . '<br/>nfile: ' . $nfile;
+$notice .= '<br/>filename: ' . $filename . '<br/>';
+
+//debug message
+//echo JError::raiseNotice(100,$notice);
+
+$array['photo2'] = $filename;
+}
+endif;
+//*****************************************************
+			//Support for file field: photo3
+				if(isset($_FILES['jform']['name']['photo3'])):
+					jimport('joomla.filesystem.file');
+					jimport('joomla.filesystem.file');
+					$file = $_FILES['jform'];
+
+					//Check if the server found any error.
+					$fileError = $file['error']['photo3'];
+					$message = '';
+					if($fileError > 0 && $fileError != 4) {
+						switch ($fileError) :
+							case 1:
+								$message = JText::_( 'File size exceeds allowed by the server');
+								break;
+							case 2:
+								$message = JText::_( 'File size exceeds allowed by the html form');
+								break;
+							case 3:
+								$message = JText::_( 'Partial upload error');
+								break;
+						endswitch;
+						if($message != '') :
+							JError::raiseWarning(500,$message);
+							return false;
+						endif;
+					}
+					else if($fileError == 4){
+						if(isset($array['photo3_hidden'])):;
+							$array['photo3'] = $array['photo3_hidden'];
+						endif;
+					}
+					else{
+
+						//Check for filesize
+						$fileSize = $file['size']['photo3'];
+						if($fileSize > 1048576):
+							JError::raiseWarning(500, 'File bigger than 1MB' );
+							return false;
+						endif;
+
+						//Check for filetype
+						$okMIMETypes = 'image/jpeg,image/png,image/gif';
+						$validMIMEArray = explode(",",$okMIMETypes);
+						$fileMime = $file['type']['photo3'];
+						if(!in_array($fileMime,$validMIMEArray)):
+							JError::raiseWarning(500,'This filetype is not allowed');
+							return false;
+						endif;
+
+						//Replace any special characters in the filename
+						$filename = explode('.',$file['name']['photo3']);
+						$filename[0] = preg_replace("/[^A-Za-z0-9]/i", "-", $filename[0]);
+
+						//Add Timestamp MD5 to avoid overwriting
+						$filename = md5(time()) . '-' . implode('.',$filename);
+						// $uploadPath =JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_photo'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename;
+						
+						$uploadPath = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename;
+						
+						$fileTemp = $file['tmp_name']['photo3'];
+						
+						if(!JFile::exists($uploadPath)):
+
+							if (!JFile::upload($fileTemp, $uploadPath)):
+
+								JError::raiseWarning(500,'Error moving file');
+
+								return false;
+
+							endif;
+
+						endif;
+
+
+// $ofile = JPATH_ROOT . DIRECTORY_SEPARATOR .'raindrops2.jpg'; //works
+// $nfile = JPATH_ROOT . DIRECTORY_SEPARATOR .'xxx.jpg'; //works
+
+$ofile = $uploadPath;//works
+//$nfile = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.$filename.'.jpg'; //works
+//$nfile = JPATH_ROOT.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'diaryitems'.DIRECTORY_SEPARATOR.'q75-'.$filename; //works
+$nfile = $uploadPath;//works
+
+$image=imagecreatefromjpeg($ofile);  // MUST match image type when 
+//imagefilter($image, IMG_FILTER_GRAYSCALE);
+imagefilter($image, IMG_FILTER_SMOOTH, 6);
+imagejpeg($image,$nfile, 75);
+imagedestroy($image);
+//unlink($uploadPath);
+
+$notice = 'ofile: ' . $ofile . '<br/>nfile: ' . $nfile;
+$notice .= '<br/>filename: ' . $filename . '<br/>';
+
+//debug message
+//echo JError::raiseNotice(100,$notice);
+$array['photo3'] = $filename;
+}
+endif;
+
+//**********************
+
+
 
 		//Support for checkbox field: checkbox
 		if (!isset($array['checkbox'])){
@@ -159,11 +385,11 @@ class DiaryTablediaryitem extends JTable {
     private function JAccessRulestoArray($jaccessrules){
         $rules = array();
         foreach($jaccessrules as $action => $jaccess){
-            //$actions = array();
-            //foreach($jaccess->getData() as $group => $allow){
-            //    $actions[$group] = ((bool)$allow);
-            //}
-            //$rules[$action] = $actions;
+            $actions = array();
+            foreach($jaccess->getData() as $group => $allow){
+                $actions[$group] = ((bool)$allow);
+            }
+            $rules[$action] = $actions;
         }
         return $rules;
     }
@@ -286,6 +512,4 @@ class DiaryTablediaryitem extends JTable {
         return $assetParentId;
     }
     
-    
-
 }
